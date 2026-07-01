@@ -1,0 +1,25 @@
+{
+  "name": "asset-race-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "주식·코인 자산 막대 레이스(bar race) 영상 생성기 — 실제 시장 데이터 + 캔버스 렌더 + WebCodecs MP4 내보내기",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "mp4-muxer": "^5.1.5",
+    "next": "14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/dom-webcodecs": "^0.1.11",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.3"
+  }
+}
