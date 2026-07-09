@@ -1,0 +1,10 @@
+# 한 줄 실행:  docker compose up --build
+# 키는 .env 에 넣습니다 (.env.example 복사).  브라우저에서 http://localhost:8787
+services:
+  cardnews:
+    build: .
+    ports:
+      - '8787:8787'
+    env_file:
+      - .env
+    restart: unless-stopped

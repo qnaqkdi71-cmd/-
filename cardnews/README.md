@@ -26,19 +26,39 @@
 
 ## 실행
 
+키는 `.env`로 관리합니다: `cp .env.example .env` 후 값을 채우세요. `ANTHROPIC_API_KEY`만 있으면
+카피 생성이 되고, 가게 검색·지도 키는 **선택**(없으면 해당 UI가 자동으로 숨겨집니다).
+
+`.env`는 서버가 자동으로 읽습니다(Node `--env-file`). 값만 채우면 아래 커맨드가 그대로 동작합니다.
+
+### 개발 (한 커맨드로 API + 웹 동시 실행)
+
 ```bash
 npm install
-
-# 1) 서버 (LLM 프록시 + 가게 검색/지도/사진 프록시) — 키는 환경변수로만
-ANTHROPIC_API_KEY=sk-ant-... \
-  KAKAO_REST_KEY=... NAVER_SEARCH_ID=... NAVER_SEARCH_SECRET=... \
-  npm run server                               # http://localhost:8787
-
-# 2) 프론트 개발 서버 (별도 터미널, /api → 8787 프록시)
-npm run dev                                    # http://localhost:5173
+npm run dev          # http://localhost:5173  (API 서버 :8787도 함께 뜸, /api 자동 프록시)
 ```
 
-가게 검색·지도 키는 **선택**입니다. 안 넣으면 해당 UI가 자동으로 숨겨지고, 카드 배경은 주제 사진(Openverse/Unsplash)만 씁니다.
+### 프로덕션 (한 포트에서 사이트 + API)
+
+```bash
+npm run build
+npm start            # http://localhost:8787  (사이트·API 한 곳에서)
+```
+
+### Docker (한 줄 실행)
+
+```bash
+cp .env.example .env      # 키 채우기
+docker compose up --build # http://localhost:8787
+```
+
+또는 이미지로 직접:
+
+```bash
+docker build -t cardnews .
+docker run --rm -p 8787:8787 --env-file .env cardnews
+```
+
 전체 환경변수는 `.env.example` 참고.
 
 프로덕션:
