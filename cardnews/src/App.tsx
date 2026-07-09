@@ -1,16 +1,28 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CardPreview } from './components/CardPreview';
 import { EmptyState } from './components/EmptyState';
 import { InputPanel } from './components/InputPanel';
-import { useUnsplashUrls } from './hooks/useUnsplash';
+import { useCardImages } from './hooks/useCardImages';
 import { decorateCards } from './lib/decorate';
 import { useAppState } from './state/useAppState';
+import type { AppConfig } from './types';
 
 export default function App() {
   const app = useAppState();
-  const imgUrls = useUnsplashUrls(app.rawCards, app.imgMode, app.genSeed, app.unsplashKey, app.category);
+  const [config, setConfig] = useState<AppConfig | null>(null);
+
+  // 서버에 어떤 기능이 켜져 있는지 물어 UI를 맞춘다 (가게 검색·지도 노출 여부)
+  useEffect(() => {
+    fetch('/api/config')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setConfig(d))
+      .catch(() => setConfig({ placeProviders: [], staticMap: false, keylessPhoto: true }));
+  }, []);
+
+  const bgUrls = useCardImages(app.rawCards, app.imgMode, app.genSeed, app.unsplashKey, app.category, app.place, config);
 
   const hasCards = !app.loading && app.rawCards.length > 0;
+  const placeAvailable = !!app.place;
 
   const cards = useMemo(
     () =>
@@ -21,10 +33,10 @@ export default function App() {
         unsplashKey: app.unsplashKey,
         imgMode: app.imgMode,
         genSeed: app.genSeed,
-        imgUrls,
+        bgUrls,
         genId: app.genId,
       }),
-    [app.rawCards, app.skin, app.category, app.handle, app.unsplashKey, app.imgMode, app.genSeed, imgUrls, app.genId],
+    [app.rawCards, app.skin, app.category, app.handle, app.unsplashKey, app.imgMode, app.genSeed, bgUrls, app.genId],
   );
 
   return (
@@ -49,6 +61,8 @@ export default function App() {
         loading={app.loading}
         error={app.error}
         hasCards={app.rawCards.length > 0}
+        config={config}
+        place={app.place}
         set={app.set}
         generate={app.generate}
       />
@@ -74,7 +88,14 @@ export default function App() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'flex-start' }}>
               {cards.map((card, i) => (
-                <CardPreview key={app.genId + '-' + i} card={card} index={i} onSetMode={app.setImgMode} onBumpSeed={app.bumpSeed} />
+                <CardPreview
+                  key={app.genId + '-' + i}
+                  card={card}
+                  index={i}
+                  placeAvailable={placeAvailable}
+                  onSetMode={app.setImgMode}
+                  onBumpSeed={app.bumpSeed}
+                />
               ))}
             </div>
           </>

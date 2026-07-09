@@ -5,7 +5,7 @@ import { ImageDropSlot } from './ImageDropSlot';
 export function CardView({ card }: { card: DecoratedCard }) {
   return (
     <div style={card.wrapStyle}>
-      {card.showAiImg && (
+      {card.showBgImg && (
         <>
           <div style={card.aiImgStyle} />
           {card.scrimStyle && <div style={card.scrimStyle} />}

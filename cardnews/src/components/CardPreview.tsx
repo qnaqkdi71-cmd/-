@@ -19,11 +19,12 @@ function smallBtn(active: boolean): Style {
 export interface CardPreviewProps {
   card: DecoratedCard;
   index: number;
+  placeAvailable: boolean;
   onSetMode: (index: number, mode: ImgMode) => void;
   onBumpSeed: (index: number) => void;
 }
 
-export function CardPreview({ card, index, onSetMode, onBumpSeed }: CardPreviewProps) {
+export function CardPreview({ card, index, placeAvailable, onSetMode, onBumpSeed }: CardPreviewProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 346 }}>
       <div style={{ width: 346, height: 432, overflow: 'hidden', flex: 'none', borderRadius: 4, outline: '1px solid rgba(0,0,0,0.08)' }}>
@@ -33,9 +34,14 @@ export function CardPreview({ card, index, onSetMode, onBumpSeed }: CardPreviewP
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, paddingLeft: 2, flexWrap: 'wrap' }}>
         <div style={{ fontSize: 12, color: '#7a7a7a', flex: 1, minWidth: 50 }}>{card.label}</div>
-        <button onClick={() => onSetMode(index, 'ai')} style={smallBtn(card.showAiImg)}>
-          AI 이미지
+        <button onClick={() => onSetMode(index, 'ai')} style={smallBtn(card.isAi)}>
+          주제 사진
         </button>
+        {placeAvailable && (
+          <button onClick={() => onSetMode(index, 'place')} style={smallBtn(card.isPlace)}>
+            🗺 지도
+          </button>
+        )}
         <button onClick={() => onSetMode(index, 'manual')} style={smallBtn(card.showManualImg)}>
           직접 넣기
         </button>
@@ -45,7 +51,7 @@ export function CardPreview({ card, index, onSetMode, onBumpSeed }: CardPreviewP
           </button>
         )}
       </div>
-      {card.showAiImg && (
+      {card.isAi && (
         <button onClick={() => onBumpSeed(index)} style={{ ...smallBtn(false), alignSelf: 'flex-start' }}>
           🔄 다른 이미지
         </button>

@@ -7,9 +7,23 @@ const TONE_GUIDE = {
   트렌디형: 'Z세대 감성의 짧고 위트있는 문장. 단, 유행어 남발 금지.',
 };
 
-export function buildPrompt({ category, title, notes, tone, count }) {
+function placeBlock(place) {
+  if (!place || !place.name) return null;
+  const parts = [
+    '실제 장소 정보 (검색 API 확인됨 — 이 사실만 사용, 없는 정보는 지어내지 말 것):',
+    '- 상호: ' + place.name,
+  ];
+  if (place.category) parts.push('- 분류: ' + place.category);
+  if (place.roadAddress || place.address) parts.push('- 주소: ' + (place.roadAddress || place.address));
+  if (place.phone) parts.push('- 전화: ' + place.phone);
+  parts.push('※ 별점 · 리뷰 · 평점은 제공되지 않았습니다. 이런 수치는 절대 지어내지 마세요.');
+  return parts.join('\n');
+}
+
+export function buildPrompt({ category, title, notes, tone, count, place }) {
   const safeTone = TONE_GUIDE[tone] ? tone : '신뢰형';
   const safeCount = Math.min(10, Math.max(6, Number(count) || 9));
+  const pb = placeBlock(place);
   return [
     '당신은 인스타그램 카드뉴스 전문 카피라이터입니다. 아래 요청으로 캐러셀 카드뉴스 카피를 작성하세요.',
     '',
@@ -18,6 +32,7 @@ export function buildPrompt({ category, title, notes, tone, count }) {
     '추가 요구사항: ' + (String(notes || '').trim() || '없음 — 알아서 최적의 구성을 만드세요'),
     '톤: ' + safeTone + ' — ' + TONE_GUIDE[safeTone],
     '카드 수: 정확히 ' + safeCount + '장',
+    ...(pb ? ['', pb] : []),
     '',
     '반드시 아래 스키마의 순수 JSON만 출력하세요. 코드펜스, 설명 금지.',
     '{"cards":[ ... ]}',

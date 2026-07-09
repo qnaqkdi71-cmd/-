@@ -10,7 +10,8 @@ export interface DecorateCtx {
   unsplashKey: string;
   imgMode: Record<number, ImgMode>;
   genSeed: Record<number, number>;
-  imgUrls: Record<number, { k: string; url: string }>;
+  // 카드별로 해석된 배경 URL(주제 사진/지도). 없으면 picsum 예시로 폴백.
+  bgUrls: Record<number, string>;
   genId: number;
 }
 
@@ -95,12 +96,10 @@ export function decorateCards(rawCards: RawCard[], ctx: DecorateCtx): DecoratedC
       ihash = (ihash * 31 + istr.charCodeAt(h)) % 100000;
     }
     const hasKey = ctx.unsplashKey.trim().length > 0;
-    const resolved = ctx.imgUrls[i];
-    const cacheKey = imgKw + '|' + seed;
-    const genImgUrl =
-      hasKey && resolved && resolved.k === cacheKey && resolved.url
-        ? resolved.url
-        : 'https://picsum.photos/seed/' + ihash + '/1080/1350';
+    // 해석된 URL(주제 사진 or 지도)이 있으면 사용, 없으면 picsum 예시로 폴백.
+    const genImgUrl = ctx.bgUrls[i] || 'https://picsum.photos/seed/' + ihash + '/1080/1350';
+    const isAi = mode === 'ai';
+    const isPlace = mode === 'place';
 
     let sub = nl(c.sub);
     if (skin === 'bold' && sub && (type === 'cover' || type === 'big' || type === 'point')) {
@@ -128,15 +127,16 @@ export function decorateCards(rawCards: RawCard[], ctx: DecorateCtx): DecoratedC
         desc: nl(it.desc),
       })),
       imageOn,
-      showAiImg: mode === 'ai',
+      isAi,
+      isPlace,
+      showBgImg: isAi || isPlace,
       showManualImg: mode === 'manual',
       genImgUrl,
       slotId: 'g' + (ctx.genId || 0) + '-c' + i,
       imgHint: nl(c.img) ? '이미지: ' + nl(c.img) : '이미지를 드래그해서 넣으세요',
-      imgHintLabel:
-        (mode === 'ai' ? (hasKey ? '실사진 키워드: ' : '예시 사진 (키워드: ') : '추천 이미지: ') +
-        (nl(c.img) || '내용에 어울리는 사진') +
-        (mode === 'ai' && !hasKey ? ')' : ''),
+      imgHintLabel: isPlace
+        ? '가게 위치 지도'
+        : (hasKey ? '실사진 키워드: ' : '주제 사진: ') + (nl(c.img) || '내용에 어울리는 사진'),
       aiImgStyle: {
         position: 'absolute',
         top: 0,

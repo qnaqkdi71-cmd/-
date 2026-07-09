@@ -1,6 +1,7 @@
 import type { PersistedState } from '../state/useAppState';
 import { CATEGORIES, SKIN_DEFS, TONES } from '../types';
-import type { Skin, Style, Tone } from '../types';
+import type { AppConfig, Place, Skin, Style, Tone } from '../types';
+import { PlaceSearch } from './PlaceSearch';
 
 const inputStyle: Style = {
   fontSize: 15,
@@ -43,6 +44,8 @@ export interface InputPanelProps {
   loading: boolean;
   error: string;
   hasCards: boolean;
+  config: AppConfig | null;
+  place: Place | null;
   set: <K extends keyof PersistedState>(key: K, value: PersistedState[K]) => void;
   generate: () => void;
 }
@@ -117,6 +120,16 @@ export function InputPanel(p: InputPanelProps) {
           ))}
         </div>
       </div>
+
+      {/* 가게 검색 (검색 API가 설정된 경우에만) */}
+      {p.config && p.config.placeProviders.length > 0 && (
+        <PlaceSearch
+          config={p.config}
+          place={p.place}
+          onSelect={(place) => p.set('place', place)}
+          onClear={() => p.set('place', null)}
+        />
+      )}
 
       {/* 3. 제목 */}
       <div style={section}>

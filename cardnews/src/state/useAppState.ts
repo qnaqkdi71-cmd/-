@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { parseCards } from '../lib/parseCards';
-import type { ImgMode, RawCard, Skin, Tone } from '../types';
+import type { ImgMode, Place, RawCard, Skin, Tone } from '../types';
 
 const STORAGE_KEY = 'cardnews_generator_v1';
 
@@ -13,6 +13,7 @@ export interface PersistedState {
   count: number;
   handle: string;
   unsplashKey: string;
+  place: Place | null;
   rawCards: RawCard[];
   resultTitle: string;
   imgMode: Record<number, ImgMode>;
@@ -29,6 +30,7 @@ const DEFAULTS: PersistedState = {
   count: 9,
   handle: '@your_account',
   unsplashKey: '',
+  place: null,
   rawCards: [],
   resultTitle: '',
   imgMode: {},
@@ -44,6 +46,7 @@ function loadSaved(): PersistedState {
     (['skin', 'category', 'title', 'notes', 'tone', 'count', 'handle', 'unsplashKey', 'resultTitle', 'genId'] as const).forEach((k) => {
       if (saved[k] !== undefined) (keep as Record<string, unknown>)[k] = saved[k];
     });
+    if (saved.place && typeof saved.place === 'object') keep.place = saved.place;
     if (Array.isArray(saved.rawCards)) keep.rawCards = saved.rawCards;
     if (saved.imgMode && typeof saved.imgMode === 'object') keep.imgMode = saved.imgMode;
     if (saved.genSeed && typeof saved.genSeed === 'object') keep.genSeed = saved.genSeed;
@@ -97,6 +100,7 @@ export function useAppState() {
           notes: state.notes,
           tone: state.tone,
           count: state.count,
+          place: state.place,
         }),
       });
       const data = await r.json().catch(() => null);

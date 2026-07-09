@@ -3,7 +3,29 @@ import type { CSSProperties } from 'react';
 export type Skin = 'minimal' | 'hand' | 'bold' | 'pop';
 export type Tone = '신뢰형' | '친근형' | '트렌디형';
 export type CardType = 'cover' | 'big' | 'list' | 'point' | 'cta';
-export type ImgMode = 'none' | 'ai' | 'manual';
+// none=배경끔, ai=주제 사진, place=가게 위치 지도, manual=직접 업로드
+export type ImgMode = 'none' | 'ai' | 'place' | 'manual';
+
+export type PlaceProvider = 'kakao' | 'naver';
+
+/** 검색 API로 확인된 가게 사실 정보 (별점·리뷰 없음) */
+export interface Place {
+  provider: PlaceProvider;
+  name: string;
+  category: string;
+  address: string;
+  roadAddress: string;
+  phone: string;
+  lat: number | null;
+  lng: number | null;
+  placeUrl: string;
+}
+
+export interface AppConfig {
+  placeProviders: PlaceProvider[];
+  staticMap: boolean;
+  keylessPhoto: boolean;
+}
 
 // text-wrap은 아직 csstype에 없을 수 있어 확장해 둔다 (React는 그대로 전달함)
 export type Style = CSSProperties & { textWrap?: 'balance' | 'pretty' | 'wrap' };
@@ -51,7 +73,9 @@ export interface DecoratedCard {
   isCta: boolean;
   hasFooter: boolean;
   imageOn: boolean;
-  showAiImg: boolean;
+  isAi: boolean;
+  isPlace: boolean;
+  showBgImg: boolean;
   showManualImg: boolean;
   genImgUrl: string;
   slotId: string;
