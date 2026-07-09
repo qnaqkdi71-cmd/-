@@ -38,6 +38,23 @@ npm install
 npm run dev          # http://localhost:5173  (API 서버 :8787도 함께 뜸, /api 자동 프록시)
 ```
 
+### 라이브 동기화 — 원격 수정을 다운로드 없이 자동 반영
+
+한 번만 clone 해두면, 원격(브랜치)에 새 커밋이 올라올 때마다 로컬이 자동으로 pull 하고
+Vite HMR로 화면이 갱신됩니다. ZIP을 다시 받을 필요가 없습니다.
+
+```bash
+# 최초 1회만
+git clone -b claude/card-news-generator-4cassg https://github.com/qnaqkdi71-cmd/-.git cardnews-app
+cd cardnews-app/cardnews && npm install
+
+# 이후엔 이 한 커맨드로 실행 (자동 pull + API + 웹)
+npm run dev:sync     # http://localhost:5173, 원격 변경을 ~10초 간격으로 자동 반영
+```
+
+동기화 간격은 `SYNC_INTERVAL=5 npm run dev:sync`처럼 조절할 수 있습니다. 로컬에서 직접 수정 중일
+때는 fast-forward만 하므로 작업을 덮어쓰지 않습니다.
+
 ### 프로덕션 (한 포트에서 사이트 + API)
 
 ```bash

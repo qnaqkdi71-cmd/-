@@ -6,6 +6,7 @@
   "description": "인스타그램 카드뉴스 자동 생성기 — 주제·제목 입력 → LLM 카피 → 1080×1350 캐러셀 카드 자동 완성",
   "scripts": {
     "dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:sync": "concurrently -k -n sync,api,web -c magenta,blue,green \"node scripts/autopull.mjs\" \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "node --env-file-if-exists=.env server/index.mjs",
     "dev:web": "vite",
     "server": "node --env-file-if-exists=.env server/index.mjs",
