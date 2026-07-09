@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { buildDemoCards } from '../lib/demoCards';
 import { parseCards } from '../lib/parseCards';
 import type { ImgMode, Place, RawCard, Skin, Tone } from '../types';
 
@@ -91,21 +92,34 @@ export function useAppState() {
     setLoading(true);
     setError('');
     try {
-      const r = await fetch('/api/generate', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
+      let rawCards: RawCard[];
+      try {
+        // 서버가 있으면 서버가 생성(키 있으면 실제 AI, 없으면 서버 데모).
+        const r = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            category: state.category,
+            title: state.title,
+            notes: state.notes,
+            tone: state.tone,
+            count: state.count,
+            place: state.place,
+          }),
+        });
+        const data = await r.json().catch(() => null);
+        if (!r.ok) throw new Error((data && data.error) || 'HTTP ' + r.status);
+        rawCards = parseCards(String(data.text ?? ''));
+      } catch {
+        // 서버가 없거나(정적 호스팅) 응답 실패 → 브라우저 안에서 데모 카드 생성.
+        rawCards = buildDemoCards({
           category: state.category,
           title: state.title,
-          notes: state.notes,
           tone: state.tone,
           count: state.count,
           place: state.place,
-        }),
-      });
-      const data = await r.json().catch(() => null);
-      if (!r.ok) throw new Error((data && data.error) || 'HTTP ' + r.status);
-      const rawCards = parseCards(String(data.text ?? ''));
+        });
+      }
       // 본문 카드만 AI 이미지 기본 켬 — 커버/CTA는 스킨 배경 유지
       const imgMode: Record<number, ImgMode> = {};
       const genSeed: Record<number, number> = {};
