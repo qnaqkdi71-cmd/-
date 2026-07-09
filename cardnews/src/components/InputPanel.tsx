@@ -241,6 +241,13 @@ export function InputPanel(p: InputPanelProps) {
         </div>
       )}
 
+      {p.config && !p.config.llm && (
+        <div style={{ fontSize: 12.5, color: '#8a6d1a', lineHeight: 1.55, background: '#fdf6e3', border: '1px solid #f0e2b8', borderRadius: 11, padding: '12px 14px' }}>
+          <b>데모 모드</b> · 서버에 API 키가 없어 예시 카드로 생성됩니다. 레이아웃·스킨·이미지 기능은 그대로 써볼 수
+          있어요. 서버 환경변수 <code>ANTHROPIC_API_KEY</code>를 넣으면 실제 AI 생성으로 바뀝니다.
+        </div>
+      )}
+
       <div style={{ fontSize: 12, color: '#7a7a7a', lineHeight: 1.6, borderTop: '1px solid #e0e0e0', paddingTop: 20 }}>
         1080×1350 (4:5) · 카드마다 "사진 배경"을 켜고 이미지를 드래그해서 넣을 수 있습니다. AI가 카드별 추천 이미지를
         제안합니다.

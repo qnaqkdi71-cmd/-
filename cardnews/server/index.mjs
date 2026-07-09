@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import Anthropic from '@anthropic-ai/sdk';
 import { buildPrompt } from './prompt.mjs';
+import { buildDemoCards } from './demo.mjs';
 import { kakaoConfigured, naverConfigured, searchPlaces } from './place.mjs';
 import { searchPhoto } from './photo.mjs';
 import { fetchStaticMap, staticMapConfigured } from './staticmap.mjs';
@@ -12,6 +13,8 @@ import { fetchStaticMap, staticMapConfigured } from './staticmap.mjs';
 const PORT = Number(process.env.PORT || 8787);
 // 핸드오프 문서가 지정한 모델. CARDNEWS_MODEL 환경변수로 교체 가능.
 const MODEL = process.env.CARDNEWS_MODEL || 'claude-sonnet-4-5';
+
+const HAS_LLM_KEY = !!(process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN);
 
 const app = express();
 app.use(express.json({ limit: '1mb' }));
@@ -22,6 +25,7 @@ app.get('/api/config', (_req, res) => {
     placeProviders: [...(kakaoConfigured() ? ['kakao'] : []), ...(naverConfigured() ? ['naver'] : [])],
     staticMap: staticMapConfigured(),
     keylessPhoto: true, // Openverse는 키가 필요 없음
+    llm: HAS_LLM_KEY, // false면 데모 카드로 생성
   });
 });
 
@@ -54,13 +58,16 @@ app.get('/api/staticmap', async (req, res) => {
 });
 
 app.post('/api/generate', async (req, res) => {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    res.status(500).json({ error: '서버에 ANTHROPIC_API_KEY가 설정되지 않았습니다.' });
-    return;
-  }
   const { category, title, notes, tone, count, place } = req.body || {};
   if (typeof title !== 'string' || !title.trim()) {
     res.status(400).json({ error: '제목(주제)이 필요합니다.' });
+    return;
+  }
+
+  // 키가 없으면 데모 카드로 응답 — 키 없이도 앱을 끝까지 써볼 수 있게.
+  if (!HAS_LLM_KEY) {
+    const cards = buildDemoCards({ category, title, tone, count, place });
+    res.json({ text: JSON.stringify({ cards }), demo: true });
     return;
   }
 
@@ -75,7 +82,7 @@ app.post('/api/generate', async (req, res) => {
       .filter((block) => block.type === 'text')
       .map((block) => block.text)
       .join('');
-    res.json({ text });
+    res.json({ text, demo: false });
   } catch (err) {
     if (err instanceof Anthropic.AuthenticationError) {
       res.status(500).json({ error: 'LLM API 키 인증에 실패했습니다.' });

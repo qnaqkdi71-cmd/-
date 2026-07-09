@@ -25,6 +25,7 @@ export interface AppConfig {
   placeProviders: PlaceProvider[];
   staticMap: boolean;
   keylessPhoto: boolean;
+  llm: boolean; // false면 서버가 데모 카드로 생성
 }
 
 // text-wrap은 아직 csstype에 없을 수 있어 확장해 둔다 (React는 그대로 전달함)

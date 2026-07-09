@@ -16,7 +16,7 @@ export default function App() {
     fetch('/api/config')
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => d && setConfig(d))
-      .catch(() => setConfig({ placeProviders: [], staticMap: false, keylessPhoto: true }));
+      .catch(() => setConfig({ placeProviders: [], staticMap: false, keylessPhoto: true, llm: false }));
   }, []);
 
   const bgUrls = useCardImages(app.rawCards, app.imgMode, app.genSeed, app.unsplashKey, app.category, app.place, config);
@@ -84,6 +84,7 @@ export default function App() {
               <div style={{ fontSize: 20, fontWeight: 600, letterSpacing: '-0.3px' }}>{app.resultTitle}</div>
               <div style={{ fontSize: 14, color: '#7a7a7a' }}>
                 {app.rawCards.length}장 · 1080×1350 · {app.tone}
+                {config && !config.llm ? ' · 데모' : ''}
               </div>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'flex-start' }}>
