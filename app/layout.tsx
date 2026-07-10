@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "자산 막대 레이스 영상 생성기",
+  title: "전문직 상세페이지 만들기",
   description:
-    "실제 주식(Yahoo)·코인(Binance) 데이터로 1080×1920 세로 영상을 만드는 막대 레이스 차트 생성기. WebCodecs로 MP4 내보내기.",
+    "직업만 입력하면 문의를 부르는 전문직 상세페이지가 바로 완성됩니다. 코딩 없이 미리보기 후 HTML 파일로 저장하세요.",
 };
 
 export default function RootLayout({
