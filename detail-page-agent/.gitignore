@@ -6,3 +6,5 @@ venv/
 output/*.png
 output/render_plan.json
 !output/.gitkeep
+workspace/*.json
+!workspace/.gitkeep
