@@ -11,8 +11,11 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 TemplateKind = Literal[
-    "hero", "trust", "problem", "solution", "feature",
-    "spec", "howto", "compare", "review", "faq", "cta",
+    # 세일즈형 13섹션 템플릿 (참고 사양 기준)
+    "hero", "pain", "problem", "story", "solution", "howto",
+    "social_proof", "authority", "benefits", "risk", "versus", "cta",
+    # 하위호환용(기존 상세형 템플릿)
+    "trust", "feature", "spec", "compare", "review", "faq",
 ]
 
 

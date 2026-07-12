@@ -3,8 +3,7 @@ __pycache__/
 .env
 .venv/
 venv/
+# 생성 산출물(재생성 가능) — examples/의 예시 데이터는 커밋됨
 output/*.png
-output/render_plan.json
+output/*.json
 !output/.gitkeep
-workspace/*.json
-!workspace/.gitkeep

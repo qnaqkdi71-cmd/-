@@ -111,6 +111,63 @@ _BASE = env.from_string("""<!doctype html><html lang="ko"><head><meta charset="u
              font-size:20px; font-weight:900; letter-spacing:.02em; }
   .center { text-align:center; }
   .center .checklist { display:inline-block; text-align:left; }
+  /* --- 세일즈형 섹션 컴포넌트 --- */
+  .pain-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:30px; }
+  .pain-card { padding:24px 26px; border-radius:16px; background:{{accent}}12;
+               border:1.5px solid {{accent}}2e; font-size:17px; line-height:1.55; }
+  .pain-card .m { display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; border-radius:50%; background:{{accent}}; color:#fff;
+    font-weight:900; margin-right:12px; font-size:15px; }
+  .hook { margin-top:28px; font-size:20px; font-weight:800; color:{{accent}}; }
+  .ba { display:grid; grid-template-columns:1fr auto 1fr; gap:20px; margin-top:34px; }
+  .ba-col { padding:28px; border-radius:18px; }
+  .ba-col.before { background:#00000012; }
+  .ba-col.after { background:{{accent}}1c; border:1.5px solid {{accent}}44; }
+  .ba-col .tag { font-size:13px; font-weight:800; letter-spacing:.1em; opacity:.6; }
+  .ba-col.after .tag { color:{{accent}}; opacity:1; }
+  .ba-col .t { margin-top:12px; font-size:18px; line-height:1.6; font-weight:600; }
+  .ba-arrow { display:flex; align-items:center; font-size:34px; opacity:.5; }
+  .proof { margin-top:24px; font-size:16px; font-weight:700; opacity:.85; }
+  .stats { display:flex; gap:44px; margin-top:26px; }
+  .stat .num { font-size:48px; font-weight:900; color:{{accent}}; line-height:1; }
+  .stat .lbl { margin-top:8px; font-size:15px; opacity:.7; }
+  .auth { display:grid; grid-template-columns:220px 1fr; gap:36px; align-items:center;
+          margin-top:30px; }
+  .auth-photo { width:220px; height:220px; border-radius:20px;
+    background:linear-gradient(135deg,{{accent}}22,{{accent}}0d);
+    border:1.5px solid {{accent}}44; display:flex; align-items:center;
+    justify-content:center; font-size:44px; opacity:.5; }
+  .auth-cred { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+  .benefits-list { margin-top:28px; }
+  .bonus { display:grid; gap:12px; margin-top:24px; }
+  .bonus-card { display:flex; justify-content:space-between; align-items:center;
+    padding:18px 22px; border-radius:14px; background:{{accent}}14;
+    border:1.5px dashed {{accent}}55; }
+  .bonus-card .b::before { content:"BONUS"; font-size:11px; font-weight:900;
+    color:{{accent}}; background:{{accent}}22; padding:3px 8px; border-radius:6px;
+    margin-right:10px; }
+  .bonus-card .v { font-weight:800; color:{{accent}}; }
+  .total { margin-top:22px; font-size:22px; font-weight:900; }
+  .guarantee { margin-top:28px; padding:28px 30px; border-radius:18px;
+    background:{{accent}}14; border:1.5px solid {{accent}}44; font-size:18px;
+    line-height:1.65; font-weight:600; }
+  .guarantee .seal { display:inline-block; width:40px; height:40px; border-radius:50%;
+    background:{{accent}}; color:#fff; text-align:center; line-height:40px;
+    font-weight:900; margin-right:10px; }
+  .versus { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:32px; }
+  .vs-col { padding:26px 28px; border-radius:18px; }
+  .vs-col.bad { background:#00000012; }
+  .vs-col.good { background:{{accent}}18; border:1.5px solid {{accent}}44; }
+  .vs-col h4 { font-size:18px; font-weight:800; margin-bottom:16px; }
+  .vs-col.good h4 { color:{{accent}}; }
+  .vs-col ul { list-style:none; }
+  .vs-col li { position:relative; padding-left:30px; margin-top:12px; font-size:16px;
+    line-height:1.5; }
+  .vs-col.good li::before { content:"\\2713"; position:absolute; left:0;
+    color:{{accent}}; font-weight:900; }
+  .vs-col.bad li::before { content:"\\2715"; position:absolute; left:0; opacity:.4;
+    font-weight:900; }
+  .question { margin-top:26px; text-align:center; font-size:20px; font-weight:800; }
 </style></head>
 <body>{{ body }}</body></html>""")
 
@@ -146,9 +203,98 @@ _T = {
 <div class="section">
   {% if s.eyebrow %}<div class="eyebrow" style="color:{{ s.text }};opacity:.7">{{ s.eyebrow }}</div>{% endif %}
   <h2 class="headline">{{ s.headline|nl2br }}</h2>
+  {% if s.subheadline %}<div class="subheadline">{{ s.subheadline }}</div>{% endif %}
   <ul class="checklist">
     {% for line in s.body %}<li>{{ line }}</li>{% endfor %}
   </ul>
+</div>"""),
+
+    "pain": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline">{{ s.headline|nl2br }}</h2>
+  <div class="pain-grid">
+    {% for line in s.body %}<div class="pain-card"><span class="m">!</span>{{ line }}</div>{% endfor %}
+  </div>
+  {% if s.subheadline %}<div class="hook">{{ s.subheadline }}</div>{% endif %}
+</div>"""),
+
+    "story": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline" style="font-size:34px">{{ s.headline|nl2br }}</h2>
+  <div class="ba">
+    <div class="ba-col before"><div class="tag">BEFORE</div>
+      <div class="t">{{ s.items[0].text if s.items else '' }}</div></div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-col after"><div class="tag">AFTER</div>
+      <div class="t">{{ s.items[1].text if s.items|length > 1 else '' }}</div></div>
+  </div>
+  {% if s.highlight %}<div class="proof">✓ {{ s.highlight }}</div>{% endif %}
+</div>"""),
+
+    "social_proof": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline" style="font-size:32px">{{ s.headline|nl2br }}</h2>
+  {% if s.highlight %}<div class="stats"><div class="stat">
+    <div class="num">{{ s.highlight }}</div><div class="lbl">{{ s.subheadline }}</div>
+  </div></div>{% endif %}
+  <div class="reviews">
+    {% for it in s.items %}
+    <div class="review"><div class="stars">{{ it.stars|stars }}</div>
+      <div class="txt">{{ it.text }}</div><div class="who">{{ it.name }} 고객님</div></div>
+    {% endfor %}
+  </div>
+</div>"""),
+
+    "authority": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <div class="auth">
+    <div class="auth-photo">◐</div>
+    <div>
+      <h2 class="headline" style="font-size:30px">{{ s.headline|nl2br }}</h2>
+      {% for line in s.body %}<p style="margin-top:12px;font-size:17px;line-height:1.6;opacity:.9">{{ line }}</p>{% endfor %}
+      <div class="auth-cred">{% for it in s.items %}<span class="badge">{{ it.label }}</span>{% endfor %}</div>
+    </div>
+  </div>
+</div>"""),
+
+    "benefits": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline" style="font-size:32px">{{ s.headline|nl2br }}</h2>
+  <ul class="checklist benefits-list">
+    {% for line in s.body %}<li>{{ line }}</li>{% endfor %}
+  </ul>
+  {% if s.items %}<div class="bonus">
+    {% for it in s.items %}<div class="bonus-card"><span class="b">{{ it.label }}</span><span class="v">{{ it.value }}</span></div>{% endfor %}
+  </div>{% endif %}
+  {% if s.highlight %}<div class="total">총 혜택가 {{ s.highlight }}</div>{% endif %}
+</div>"""),
+
+    "risk": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline" style="font-size:32px">{{ s.headline|nl2br }}</h2>
+  {% if s.body %}<div class="guarantee"><span class="seal">✓</span>{% for line in s.body %}{{ line }} {% endfor %}</div>{% endif %}
+  <div class="faqs">
+    {% for it in s.items %}<div class="faq"><div class="q">{{ it.q }}</div><div class="a">{{ it.a }}</div></div>{% endfor %}
+  </div>
+</div>"""),
+
+    "versus": env.from_string("""
+<div class="section">
+  {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
+  <h2 class="headline" style="font-size:32px">{{ s.headline|nl2br }}</h2>
+  <div class="versus">
+    <div class="vs-col good"><h4>{{ s.body[0] if s.body else '이 제품과 함께' }}</h4>
+      <ul>{% for it in s.items %}<li>{{ it.good }}</li>{% endfor %}</ul></div>
+    <div class="vs-col bad"><h4>{{ s.body[1] if s.body|length > 1 else '그냥 둔다면' }}</h4>
+      <ul>{% for it in s.items %}<li>{{ it.bad }}</li>{% endfor %}</ul></div>
+  </div>
+  {% if s.subheadline %}<div class="question">{{ s.subheadline }}</div>{% endif %}
 </div>"""),
 
     "feature": env.from_string("""
@@ -237,6 +383,7 @@ _T = {
   {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
   <h2 class="headline" style="font-size:44px">{{ s.headline|nl2br }}</h2>
   {% if s.subheadline %}<div class="subheadline">{{ s.subheadline }}</div>{% endif %}
+  {% if s.highlight %}<div class="total" style="margin-top:20px">{{ s.highlight }}</div>{% endif %}
   {% if s.body %}<ul class="checklist">
     {% for line in s.body %}<li>{{ line }}</li>{% endfor %}
   </ul>{% endif %}

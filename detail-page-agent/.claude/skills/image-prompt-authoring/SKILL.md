@@ -1,42 +1,65 @@
 ---
 name: image-prompt-authoring
-description: 상세페이지 이미지 슬롯에 넣을 이미지 생성 프롬프트(영문) 작성법. 피사체·구도·조명·분위기·품질 키워드 구성과 예시를 담는다. dev-prompter 에이전트가 image_prompts.json을 만들 때 사용한다.
+description: 13개 섹션별 Gemini 이미지 생성 프롬프트 작성법. 1200px 크기 고정, 실사 사진 스타일, 풀 블리드, 섹션별 프롬프트 템플릿을 담는다. prompt-generator-agent가 gemini_prompts.json을 만들 때 사용한다.
 ---
 
-# 이미지 생성 프롬프트 작법 (개발용)
+# Gemini 이미지 프롬프트 작법 (개발용)
 
-`image_slot: true`인 섹션마다, 이미지 생성 모델(Midjourney/이미지 API 등)에
-넣을 **영문 프롬프트**를 만든다. 이후 실제 컷을 이 프롬프트로 생성해 자리에
-끼운다.
+카피(copy_output.json) + 디자인(design_direction.json)을 바탕으로 13개
+섹션 이미지의 Gemini 생성 프롬프트를 만든다.
 
-## 프롬프트 구성 공식
+## ⚠️ 필수 준수 (CRITICAL)
+
+### 1. 크기 고정 (DIMENSION LOCK)
+- 너비는 **반드시 정확히 1200px**. 그 외 너비 금지.
+- 높이는 섹션별 400~800px 가변.
+- 이미지가 1200px 전체를 **마진 없이** 채운다.
+
+### 2. 실사 사진 스타일 (MANDATORY)
+- **일러스트/카툰/만화 금지.** 인물은 실제 모델(자연스러운 피부 질감).
+- 설화수·이니스프리·라네즈 광고 수준의 리얼리스틱 품질.
+- 전문 조명·구도.
+
+### 3. 풀 블리드 (FULL BLEED)
+- 좌우 마진·테두리 없이 가장자리까지 콘텐츠가 채움.
+
+## 공통 프롬프트 구조 (모든 섹션 공통 앵커)
 
 ```
-[피사체] + [컨셉/상황] + [배경] + [조명] + [분위기·스타일] + [품질] + [파라미터]
+Create a professional landing page section image.
+
+=== CRITICAL ===
+1. EXACT DIMENSIONS: 1200x[HEIGHT] pixels - MUST be exactly 1200px wide
+2. FULL BLEED: fills ENTIRE 1200px width, NO margins/borders
+
+=== PHOTOGRAPHY STYLE (MANDATORY) ===
+- REALISTIC PHOTOGRAPHY, NOT illustrations/cartoons
+- Real human models with natural skin texture when people appear
+- Photo-realistic like high-end Korean beauty ads (Sulwhasoo, Innisfree, Laneige)
+
+=== DESIGN ===
+- Style: [style_preset]; Palette: primary [color], accent [color], bg [color]
+
+=== LAYOUT / TEXT (Korean) / VISUAL ELEMENTS ===
+[섹션별 지시 + 정확한 한글 텍스트]
+
+=== FINAL CHECKLIST ===
+✓ EXACTLY 1200x[HEIGHT]px  ✓ full width no margins
+✓ realistic photos not illustrations  ✓ Korean text clear  ✓ ad-quality
 ```
 
-- **피사체**: 제품명·형태를 구체적으로.
-- **컨셉**: 해당 섹션 헤드라인과 연결(예: "12시간 지속" → 밤 침실 장면).
-- **배경**: 상세페이지에 어울리는 깔끔한 스튜디오/라이프스타일.
-- **조명**: soft natural light, studio lighting 등.
-- **스타일**: minimalist Korean e-commerce detail page style.
-- **품질**: high detail, sharp focus, 4k.
-- **파라미터**: `--ar 4:3`(feature), `--ar 16:9`(hero) 등.
+## 섹션별 높이 가이드
+hero 800 · pain 600 · problem 500 · story 700 · solution 400 · how_it_works 600 ·
+social_proof 800 · authority 500 · benefits 700 · risk_removal 500 ·
+comparison 400 · target_filter 400 · final_cta 600
 
-## 중요 규칙
+## 출력: `output/gemini_prompts.json`
+```json
+{ "section_01_hero": {"prompt": "...", "width": 1200, "height": 800, "filename": "01_hero.png"} }
+```
 
-- **화면에 글자를 넣지 않는다.** 이미지 모델은 텍스트에 약하므로, 문구는
-  이후 오버레이한다고 전제한다. ("no text, no letters"를 넣어도 좋다.)
-- 모든 컷의 제품 정체성(색·형태)을 일관되게 유지한다.
-- 과장된 성능 묘사(연기/과한 안개 등)는 피하고 사실적으로.
-
-## 예시
-
-- hero: `Product photography of a wireless mini humidifier on a bedside table, soft mist, cozy dim bedroom at night, warm ambient light, minimalist Korean e-commerce style, high detail, no text --ar 16:9`
-- feature(저소음): `Close-up of a wireless mini humidifier beside a sleeping person's nightstand, calm quiet mood, soft blue night light, shallow depth of field, clean minimalist style, no text --ar 4:3`
-
-## 작업 방법
-
-1. `workspace/copydeck.json`과 `workspace/designspec.json`을 읽는다.
-2. `image_slot: true`인 섹션 id마다 위 공식으로 프롬프트를 만든다.
-3. `{ "섹션id": "영문 프롬프트" }` 형태로 `workspace/image_prompts.json` 저장.
+## 작성 원칙
+1. 구체적 레이아웃 지시(위치·크기·정렬)
+2. 정확한 한글 텍스트 포함(모델은 글자에 약하니 명확히 요청)
+3. 모든 섹션 동일 스타일 앵커
+4. 시각적 계층(중요도별 크기/색)

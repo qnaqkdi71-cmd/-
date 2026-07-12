@@ -60,20 +60,21 @@ CHROMIUM_PATH = find_chromium()
 # ── 13-섹션 청사진 ───────────────────────────────────────────────────
 # 한국형 커머스 상세페이지의 정석 흐름. id는 파이프라인 전 구간에서
 # 섹션을 잇는 키로 쓰인다. template은 렌더러의 기본 레이아웃 힌트.
+# 세일즈형 13섹션 (참고 사양의 섹션 id·순서와 정확히 일치)
 SECTION_BLUEPRINT: list[dict] = [
-    {"id": "hero",      "label": "키비주얼·후킹",   "template": "hero"},
-    {"id": "trust",     "label": "브랜드·신뢰",     "template": "trust"},
-    {"id": "problem",   "label": "고민 제기",       "template": "problem"},
-    {"id": "solution",  "label": "해결 제시",       "template": "solution"},
-    {"id": "feature_1", "label": "핵심 특징 1",     "template": "feature"},
-    {"id": "feature_2", "label": "핵심 특징 2",     "template": "feature"},
-    {"id": "feature_3", "label": "핵심 특징 3",     "template": "feature"},
-    {"id": "spec",      "label": "상세 스펙·구성",  "template": "spec"},
-    {"id": "howto",     "label": "사용법",          "template": "howto"},
-    {"id": "compare",   "label": "비교·차별점",     "template": "compare"},
-    {"id": "review",    "label": "고객 후기",       "template": "review"},
-    {"id": "faq",       "label": "자주 묻는 질문",  "template": "faq"},
-    {"id": "cta",       "label": "구매 유도·안내",  "template": "cta"},
+    {"id": "hero",         "label": "히어로·후킹",   "template": "hero"},
+    {"id": "pain",         "label": "공감(페인)",    "template": "pain"},
+    {"id": "problem",      "label": "문제 정의",     "template": "problem"},
+    {"id": "story",        "label": "변화 스토리",   "template": "story"},
+    {"id": "solution",     "label": "솔루션 소개",   "template": "solution"},
+    {"id": "how_it_works", "label": "작동 방식",     "template": "howto"},
+    {"id": "social_proof", "label": "사회적 증거",   "template": "social_proof"},
+    {"id": "authority",    "label": "권위·신뢰",     "template": "authority"},
+    {"id": "benefits",     "label": "혜택·보너스",   "template": "benefits"},
+    {"id": "risk_removal", "label": "리스크 제거",   "template": "risk"},
+    {"id": "comparison",   "label": "최종 대비",     "template": "versus"},
+    {"id": "target_filter","label": "타겟 필터",     "template": "versus"},
+    {"id": "final_cta",    "label": "최종 CTA",      "template": "cta"},
 ]
 
 SECTION_IDS = [s["id"] for s in SECTION_BLUEPRINT]

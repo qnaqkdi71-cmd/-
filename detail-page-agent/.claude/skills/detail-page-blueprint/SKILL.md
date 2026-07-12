@@ -1,102 +1,85 @@
 ---
 name: detail-page-blueprint
-description: 커머스 상세페이지 제작의 공통 규격. 13개 섹션 청사진과 단계별 데이터 계약(brief/research/copydeck/designspec/renderplan JSON 스키마), workspace 파일 규약을 정의한다. 정보수집·리서치·카피·디자인·프롬프팅 에이전트가 모두 이 규격을 따른다.
+description: 세일즈형 상세페이지 제작의 공통 규격. 13개 섹션 청사진과 단계별 데이터 계약(structured_brief/research_output/copy_output/design_direction/gemini_prompts), output 파일 규약을 정의한다. 모든 에이전트가 이 규격을 따른다.
 ---
 
-# 상세페이지 청사진 & 데이터 계약
+# 세일즈 상세페이지 청사진 & 데이터 계약
 
-팀의 모든 에이전트는 이 규격을 공유한다. 산출물은 프로젝트 루트의
-`workspace/` 폴더에 JSON으로 저장하고, 다음 담당자가 읽어 이어받는다.
+모든 산출물은 프로젝트 루트의 `output/` 폴더에 JSON으로 저장하고, 다음
+담당자가 읽어 이어받는다.
 
-## 파이프라인과 workspace 파일 규약
+## 파이프라인과 파일 규약 (output/)
 
-| 순서 | 담당 | 읽는 파일 | 쓰는 파일 | 스키마 |
-|------|------|-----------|-----------|--------|
-| 1 | info-collector | (사용자 입력) | `workspace/brief.json` | ProductBrief |
-| 2 | market-researcher | `brief.json` | `workspace/research.json` | MarketResearch |
-| 3 | copywriter | `brief.json`, `research.json` | `workspace/copydeck.json` | CopyDeck |
-| 4 | designer | `copydeck.json`, `brief.json` | `workspace/designspec.json` | DesignSpec |
-| 5 | dev-prompter | `copydeck.json`, `designspec.json` | `workspace/image_prompts.json` → 렌더 실행 | (아래 render 스킬) |
-
-각 파일은 아래 스키마를 **정확히** 지켜야 다음 단계가 깨지지 않는다.
+| 순서 | 담당 | 읽기 | 쓰기 |
+|------|------|------|------|
+| 1 | intake-agent | 사용자 입력 | `structured_brief.json` |
+| 2 | research-agent | structured_brief | `research_output.json` |
+| 3 | copy-agent | brief + research | `copy_output.json` |
+| 4 | design-direction-agent | copy_output | `design_direction.json` |
+| 5 | prompt-generator-agent | copy + design | `gemini_prompts.json` + 렌더 실행 |
 
 ## 13-섹션 청사진 (id·순서 고정)
 
-1. `hero` — 키비주얼·후킹 헤드라인
-2. `trust` — 브랜드·신뢰 배지
-3. `problem` — 고객 고민 제기
-4. `solution` — 해결 제시
-5. `feature_1` — 핵심 특징 1
-6. `feature_2` — 핵심 특징 2
-7. `feature_3` — 핵심 특징 3
-8. `spec` — 상세 스펙·구성
-9. `howto` — 사용법
-10. `compare` — 비교·차별점
-11. `review` — 고객 후기
-12. `faq` — 자주 묻는 질문
-13. `cta` — 구매 유도·안내
+1. `hero` — 히어로·후킹
+2. `pain` — 공감(페인)
+3. `problem` — 문제 정의
+4. `story` — 변화 스토리(Before→After)
+5. `solution` — 솔루션 소개
+6. `how_it_works` — 작동 방식
+7. `social_proof` — 사회적 증거
+8. `authority` — 권위·신뢰
+9. `benefits` — 혜택·보너스
+10. `risk_removal` — 리스크 제거
+11. `comparison` — 최종 대비(있으면/없으면)
+12. `target_filter` — 타겟 필터(추천/비추천)
+13. `final_cta` — 최종 CTA
 
-## 데이터 계약 (JSON 스키마)
+## copy_output.json (렌더레디) — copy-agent 출력
 
-### ProductBrief (brief.json)
+렌더러가 바로 소비하는 정규화 형식. 13개 섹션을 이 형식으로 채운다:
+
+```json
+{ "sections": [
+  { "id": "hero", "eyebrow": "", "headline": "", "subheadline": "",
+    "body": [], "highlight": "", "items": [] }
+] }
+```
+
+`items`는 섹션별로 채운다:
+- story: `[{"text": "before"}, {"text": "after"}]`
+- how_it_works: `[{"title","desc"}]`
+- social_proof: `[{"name","stars","text"}]`
+- authority: `[{"label"}]`
+- benefits: `[{"label","value"}]` (보너스)
+- risk_removal: `[{"q","a"}]`
+- comparison / target_filter: `[{"good","bad"}]` (+ body에 [좋은 헤더, 나쁜 헤더])
+
+(각 섹션의 eyebrow/headline/… 매핑은 copy-agent 정의의 매핑표 참고)
+
+## design_direction.json — design-direction-agent 출력
+
 ```json
 {
-  "name": "string", "brand": "string", "category": "string",
-  "price": "string", "target_customer": "string",
-  "key_features": ["string"], "usp": ["string"],
-  "specs": [{"label": "string", "value": "string"}],
-  "tone": "string"
+  "style_preset": "premium",
+  "color_palette": {"primary": "#...", "accent": "#...", "background": "#ffffff",
+                    "background_alt": "#...", "text_primary": "#..."},
+  "section_backgrounds": {"hero": "primary gradient", "pain": "background_alt", ...}
 }
 ```
+- 렌더러가 `section_backgrounds` 키워드(background / background_alt / primary /
+  primary with opacity / gradient / primary gradient)와 팔레트로 섹션별
+  배경·글자·포인트 색을 자동 해석한다.
 
-### MarketResearch (research.json)
-```json
-{
-  "keywords": ["string"],
-  "competitors": [{"name": "string", "positioning": "string", "weakness": "string"}],
-  "customer_pains": ["string"], "objections": ["string"], "selling_angles": ["string"]
-}
-```
+## structured_brief.json — intake-agent 출력
+product_name, brand, one_liner, target_audience, main_problem, key_benefit,
+price{original,discounted}, urgency{type,value,bonus}, testimonials, creator_bio,
+bonus_items, guarantee, faq, brand_color.
 
-### CopyDeck (copydeck.json) — 13개 섹션
-```json
-{
-  "sections": [
-    {
-      "id": "hero",
-      "eyebrow": "string", "headline": "string", "subheadline": "string",
-      "body": ["string"], "highlight": "string",
-      "items": []
-    }
-  ]
-}
-```
-`items`는 섹션 종류별로 채운다:
-- spec: `{"label","value"}`  · howto: `{"title","desc"}`
-- compare: `{"feature","us","others"}`  · review: `{"name","stars","text"}`
-- faq: `{"q","a"}`  · trust: `{"label"}`
-- hero/problem/solution/feature/cta: items 비워도 됨(body 사용)
-
-### DesignSpec (designspec.json)
-```json
-{
-  "theme": {"primary": "#hex", "accent": "#hex", "bg": "#hex", "text": "#hex", "mood": "string"},
-  "sections": [
-    {"id": "hero", "template": "hero", "bg": "#hex 또는 CSS gradient",
-     "text": "#hex", "accent": "#hex", "image_slot": true}
-  ]
-}
-```
-`template` 허용값: `hero, trust, problem, solution, feature, spec, howto, compare, review, faq, cta`
-(각 섹션 id의 기본 template은 청사진 순서와 동일)
-
-### image_prompts.json (dev-prompter 작성)
-```json
-{ "hero": "영문 이미지 프롬프트", "feature_1": "...", "feature_2": "...", "feature_3": "..." }
-```
-`image_slot: true`인 섹션에 대해서만 작성한다.
+## research_output.json — research-agent 출력
+pain_points[5], failure_reasons[3], after_image, objections, differentiators,
+message_framework.
 
 ## 공통 원칙
-- 없는 스펙·수치·후기를 지어내지 않는다(제공 정보 기반).
-- 색은 배경/텍스트 명암 대비를 충분히 확보한다.
-- 섹션 id와 순서는 청사진을 벗어나지 않는다.
+- 없는 정보·수치·후기를 지어내지 않는다.
+- 섹션 id·순서는 청사진을 벗어나지 않는다.
+- 배경/글자 명암 대비를 확보한다.

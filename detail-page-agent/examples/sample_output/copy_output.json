@@ -1,0 +1,170 @@
+{
+  "sections": [
+    {
+      "id": "hero",
+      "eyebrow": "NATURE REPUBLIC · 어린녹차",
+      "headline": "순한 어린 녹차로\n하루의 수분을 채우다",
+      "subheadline": "건조하고 예민한 피부를 위한 데일리 수분 크림",
+      "body": [], "highlight": "", "items": []
+    },
+    {
+      "id": "pain",
+      "eyebrow": "이런 고민, 있으셨죠?",
+      "headline": "아침마다 당기는 피부,\n예민해진 볼",
+      "subheadline": "순하게, 산뜻하게 채우고 싶으셨을 거예요.",
+      "body": [
+        "환절기만 되면 볼이 당기고 각질이 일어나요",
+        "자극적인 크림은 바르면 화끈거려요",
+        "무겁고 끈적이는 제형은 하루 종일 답답하고요",
+        "여러 단계 케어는 번거로워 손이 안 가요"
+      ],
+      "highlight": "", "items": []
+    },
+    {
+      "id": "problem",
+      "eyebrow": "왜 늘 건조할까요",
+      "headline": "당신 피부 탓이 아닙니다",
+      "subheadline": "필요한 건 자극이 아니라 '순한 수분'입니다.",
+      "body": [
+        "난방·냉방으로 실내 습도가 급격히 떨어지고",
+        "강한 세안·잦은 각질 관리로 피부 장벽이 약해지고",
+        "무거운 크림은 오히려 답답함만 남기죠"
+      ],
+      "highlight": "", "items": []
+    },
+    {
+      "id": "story",
+      "eyebrow": "사용 전 → 후",
+      "headline": "딱 한 단계로\n달라진 아침",
+      "subheadline": "",
+      "body": [],
+      "highlight": "558명이 남긴 실사용 변화",
+      "items": [
+        {"text": "자고 일어나면 볼이 당기고 화장이 들뜨던 아침"},
+        {"text": "순한 수분막으로 촉촉하게 정돈되어 결이 매끈한 아침"}
+      ]
+    },
+    {
+      "id": "solution",
+      "eyebrow": "그래서, 어린 녹차",
+      "headline": "어린녹차 수분 크림",
+      "subheadline": "여린 녹차 잎의 순한 수분을 담은 데일리 마무리 크림",
+      "body": [
+        "예민해지기 쉬운 피부에 순하게",
+        "산뜻하게 스며드는 가벼운 제형",
+        "아침저녁 모든 피부 데일리"
+      ],
+      "highlight": "", "items": []
+    },
+    {
+      "id": "how_it_works",
+      "eyebrow": "HOW TO USE",
+      "headline": "3단계면 충분합니다",
+      "subheadline": "", "body": [], "highlight": "",
+      "items": [
+        {"title": "결 정돈", "desc": "세안 후 토너로 피부 결을 정돈해요"},
+        {"title": "적당량 도포", "desc": "콩알만큼 덜어 안에서 바깥으로 펴 발라요"},
+        {"title": "가볍게 마무리", "desc": "흡수될 때까지 부드럽게 눌러줘요"}
+      ]
+    },
+    {
+      "id": "social_proof",
+      "eyebrow": "REAL REVIEW",
+      "headline": "이미 검증된 사용감",
+      "subheadline": "실사용 후기",
+      "body": [],
+      "highlight": "558+",
+      "items": [
+        {"name": "이", "stars": 5, "text": "산뜻한데 촉촉해서 아침에 발라도 밀리지 않아요."},
+        {"name": "김", "stars": 5, "text": "녹차 향이 은은하고 자극 없이 순해서 매일 씁니다."},
+        {"name": "박", "stars": 4, "text": "끈적임 없이 흡수돼서 남편이랑 같이 쓰기 좋아요."}
+      ]
+    },
+    {
+      "id": "authority",
+      "eyebrow": "ABOUT NATURE REPUBLIC",
+      "headline": "자연에서 찾은\n순한 케어",
+      "subheadline": "",
+      "body": [
+        "자연주의 스킨케어를 지향하는 네이처리퍼블릭이",
+        "어린 녹차의 순한 수분에 집중해 만든 데일리 크림입니다."
+      ],
+      "highlight": "",
+      "items": [
+        {"label": "자연주의 브랜드"},
+        {"label": "어린 녹차 추출물"},
+        {"label": "모든 피부 데일리"}
+      ]
+    },
+    {
+      "id": "benefits",
+      "eyebrow": "WHAT YOU GET",
+      "headline": "이런 점이 좋아요",
+      "subheadline": "", "highlight": "",
+      "body": [
+        "순하게 채우는 수분 케어",
+        "겉돌지 않고 산뜻한 마무리",
+        "아침저녁 데일리로 부담 없이",
+        "남녀 모두 사용 가능"
+      ],
+      "items": [
+        {"label": "수분 앰플 샘플", "value": "증정"},
+        {"label": "미니 파우치", "value": "증정"}
+      ]
+    },
+    {
+      "id": "risk_removal",
+      "eyebrow": "ANTI-RISK",
+      "headline": "안심하고 만나보세요",
+      "subheadline": "",
+      "body": [
+        "개봉 전 7일 이내 교환·반품 가능,",
+        "피부 트러블 시 고객센터 상담을 지원합니다."
+      ],
+      "highlight": "",
+      "items": [
+        {"q": "지성 피부도 쓸 수 있나요?", "a": "가볍게 흡수되는 수분 제형이라 지성·복합성도 산뜻하게 사용할 수 있어요."},
+        {"q": "예민한 피부인데 괜찮을까요?", "a": "순한 사용감을 지향하지만, 예민하다면 사용 전 팔 안쪽 테스트를 권장해요."}
+      ]
+    },
+    {
+      "id": "comparison",
+      "eyebrow": "WITH vs WITHOUT",
+      "headline": "어린녹차와 함께라면",
+      "subheadline": "어떤 아침을 고르시겠어요?",
+      "body": ["어린녹차와 함께", "그냥 두면"],
+      "highlight": "",
+      "items": [
+        {"good": "순한 수분으로 촉촉하게 정돈", "bad": "당김과 각질 반복"},
+        {"good": "산뜻하게 흡수되는 데일리", "bad": "무겁고 끈적이는 답답함"},
+        {"good": "예민한 날에도 부담 적게", "bad": "자극에 예민 반응"}
+      ]
+    },
+    {
+      "id": "target_filter",
+      "eyebrow": "FOR YOU?",
+      "headline": "이런 분께 추천해요",
+      "subheadline": "당신은 어느 쪽인가요?",
+      "body": ["이런 분께 추천", "이런 분껜 비추천"],
+      "highlight": "",
+      "items": [
+        {"good": "건조·당김이 신경 쓰이는 분", "bad": "강한 기능성(미백·주름) 위주를 원하는 분"},
+        {"good": "순하고 산뜻한 데일리 크림을 찾는 분", "bad": "진하고 무거운 영양 크림을 원하는 분"},
+        {"good": "모든 피부·남녀 공용을 원하는 분", "bad": "즉각적 탄력·리프팅을 기대하는 분"}
+      ]
+    },
+    {
+      "id": "final_cta",
+      "eyebrow": "지금 만나보세요",
+      "headline": "매일의 수분,\n어린 녹차로",
+      "subheadline": "산뜻하게 스며드는 데일리 수분 크림",
+      "highlight": "",
+      "body": [
+        "기초 케어 마지막, 부담 없는 수분 마무리",
+        "모든 피부 · 아침저녁 데일리",
+        "558건의 후기로 검증된 사용감"
+      ],
+      "items": []
+    }
+  ]
+}

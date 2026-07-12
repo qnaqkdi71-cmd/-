@@ -1,0 +1,31 @@
+{
+  "style_preset": "premium",
+  "color_palette": {
+    "primary": "#4E7D3A",
+    "secondary": "#8FBF6A",
+    "accent": "#6A9A4B",
+    "background": "#ffffff",
+    "background_alt": "#f1f6ea",
+    "text_primary": "#26331c",
+    "text_secondary": "#5b6b52"
+  },
+  "typography": {
+    "headline": {"font_weight": "bold"},
+    "body": {"font_weight": "regular"}
+  },
+  "section_backgrounds": {
+    "hero": "primary gradient",
+    "pain": "background_alt",
+    "problem": "background",
+    "story": "background_alt",
+    "solution": "primary",
+    "how_it_works": "background_alt",
+    "social_proof": "background",
+    "authority": "background_alt",
+    "benefits": "primary with opacity",
+    "risk_removal": "background",
+    "comparison": "background_alt",
+    "target_filter": "background",
+    "final_cta": "primary gradient"
+  }
+}
