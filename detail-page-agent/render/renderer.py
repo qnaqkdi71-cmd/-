@@ -37,7 +37,7 @@ def render_plan(plan: RenderPlan, out_dir: Path | None = None) -> list[Path]:
             if section.template == "feature":
                 flip = feature_idx % 2 == 1
                 feature_idx += 1
-            html = render_section_html(section, flip=flip)
+            html = render_section_html(section, flip=flip, brand=plan.brand)
             page.set_content(html, wait_until="networkidle")
             fname = f"{i:02d}_{section.id}.png"
             fpath = out / fname

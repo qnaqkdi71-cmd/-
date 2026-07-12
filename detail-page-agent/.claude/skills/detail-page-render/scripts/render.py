@@ -73,7 +73,11 @@ def main() -> None:
         print("[오류] 렌더할 섹션이 없습니다. copydeck/designspec을 확인하세요.")
         sys.exit(1)
 
-    plan = RenderPlan(product_name=brief.get("name", ""), sections=sections)
+    plan = RenderPlan(
+        product_name=brief.get("name", ""),
+        brand=brief.get("brand", ""),
+        sections=sections,
+    )
     WS.mkdir(exist_ok=True)
     (WS / "renderplan.json").write_text(
         plan.model_dump_json(indent=2), encoding="utf-8"

@@ -101,4 +101,4 @@ def build_render_plan(
             image_slot=d.image_slot,
             image_prompt=prompt_map.get(c.id, ""),
         ))
-    return RenderPlan(product_name=brief.name, sections=sections)
+    return RenderPlan(product_name=brief.name, brand=brief.brand, sections=sections)

@@ -197,7 +197,7 @@ _T = {
   {% if s.eyebrow %}<div class="eyebrow">{{ s.eyebrow }}</div>{% endif %}
   <h2 class="headline" style="font-size:32px">{{ s.headline|nl2br }}</h2>
   <table class="cmp">
-    <thead><tr><th></th><th class="us">FOREST</th><th>일반 제품</th></tr></thead>
+    <thead><tr><th></th><th class="us">{{ brand or '이 제품' }}</th><th>일반 제품</th></tr></thead>
     <tbody>
     {% for it in s.items %}
       <tr><td class="feat">{{ it.feature }}</td>
@@ -245,14 +245,15 @@ _T = {
 }
 
 
-def render_section_html(section, flip: bool = False) -> str:
+def render_section_html(section, flip: bool = False, brand: str = "") -> str:
     """SectionRender → 완결 HTML 문서 문자열.
 
     pydantic 객체를 그대로 s로 넘긴다(s.headline 등 속성 접근). items의
     각 원소는 평범한 dict이며, Jinja가 it.label 을 dict['label']로 폴백 해석한다.
+    brand는 비교표 헤더 등에서 제품 브랜드를 표기하는 데 쓴다.
     """
     body_tpl = _T.get(section.template, _T["solution"])
-    body = body_tpl.render(s=section, flip=flip)
+    body = body_tpl.render(s=section, flip=flip, brand=brand)
     return _BASE.render(
         width=PAGE_WIDTH, font=FONT_STACK,
         bg=section.bg, text=section.text, accent=section.accent,

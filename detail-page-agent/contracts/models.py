@@ -116,4 +116,5 @@ class SectionRender(BaseModel):
 
 class RenderPlan(BaseModel):
     product_name: str = ""
+    brand: str = ""
     sections: list[SectionRender]
