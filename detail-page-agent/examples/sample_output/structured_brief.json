@@ -1,17 +1,17 @@
 {
-  "product_name": "네이처리퍼블릭 어린녹차 순한 크림 55ml",
-  "brand": "NATURE REPUBLIC",
-  "one_liner": "여린 녹차 잎의 순한 수분을 담은 데일리 수분 크림",
-  "target_audience": "건조하고 예민해지기 쉬운 피부에 순한 수분 보충을 원하는 데일리 사용자",
-  "main_problem": "환절기 건조·당김과 자극에 예민해진 피부",
-  "key_benefit": "순하게 채우고 산뜻하게 마무리되는 데일리 수분 케어",
-  "price": {"original": "", "discounted": "7,900원", "currency": "KRW", "unit": "10ml당 1,436원", "volume": "55ml"},
-  "urgency": {"type": "delivery", "value": "오늘출발 14:00 마감 · 7.16(목) 도착 확률 99%", "bonus": "15,000원 이상 무료배송"},
-  "rating": {"score": "4.75", "recent_6m": "4.86", "review_count": "568건"},
+  "product_name": "라노아 아쿠아 모이스처 크림",
+  "brand": "LANOA",
+  "one_liner": "속당김까지 시원하게 채우는 아쿠아 수분 크림",
+  "target_audience": "겉은 번들거리고 속은 당기는 수분 불균형 피부에 산뜻한 수분을 원하는 사용자",
+  "main_problem": "겉수분만 채워져 속당김이 반복되는 수분 부족",
+  "key_benefit": "속까지 시원하게 스며들어 끈적임 없이 촉촉하게 마무리",
+  "price": {"original": "", "discounted": "", "currency": "KRW", "volume": ""},
+  "urgency": {"type": "", "value": "", "bonus": ""},
+  "rating": {"score": "", "recent_6m": "", "review_count": ""},
   "testimonials": [],
-  "creator_bio": "자연주의 스킨케어를 지향하는 네이처리퍼블릭",
+  "creator_bio": "수분에 집중한 스킨케어 브랜드 라노아(LANOA)",
   "bonus_items": [],
   "guarantee": "개봉 전 7일 이내 교환·반품",
   "faq": [],
-  "brand_color": {"primary": "#4E7D3A", "secondary": "#8FBF6A"}
+  "brand_color": {"primary": "#1E88B0", "secondary": "#5FC5DE"}
 }

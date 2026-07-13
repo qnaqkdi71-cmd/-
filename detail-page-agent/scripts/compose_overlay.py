@@ -33,16 +33,16 @@ html,body{width:1200px;height:1200px}
 .scrim{position:absolute;left:0;right:0;bottom:0;height:66%;
  background:linear-gradient(180deg,rgba(12,20,15,0) 0%,rgba(12,20,15,.5) 42%,rgba(10,17,12,.93) 100%)}
 .txt{position:absolute;left:0;right:0;bottom:0;padding:60px 72px;color:#fff}
-.eyebrow{font-size:20px;font-weight:800;letter-spacing:.1em;color:#c7ecae;margin-bottom:14px}
+.eyebrow{font-size:20px;font-weight:800;letter-spacing:.1em;color:{{tint}};margin-bottom:14px}
 .headline{font-size:50px;font-weight:900;line-height:1.22;letter-spacing:-.02em;
  text-shadow:0 2px 16px rgba(0,0,0,.45)}
 .sub{font-size:23px;font-weight:600;margin-top:16px;opacity:.96}
-.badge{display:inline-block;margin-top:18px;background:#4E7D3A;color:#fff;font-weight:800;
+.badge{display:inline-block;margin-top:18px;background:{{primary}};color:#fff;font-weight:800;
  font-size:22px;padding:9px 22px;border-radius:999px}
 .lines{margin-top:18px}
 .lines li{list-style:none;font-size:20px;line-height:1.65;opacity:.96;padding-left:28px;
  position:relative;margin-top:4px}
-.lines li::before{content:"✓";position:absolute;left:0;color:#c7ecae;font-weight:900}
+.lines li::before{content:"✓";position:absolute;left:0;color:{{tint}};font-weight:900}
 </style></head><body><div class="wrap">
  <div class="photo"></div><div class="scrim"></div>
  <div class="txt">
@@ -78,8 +78,23 @@ def support_lines(sec: dict) -> list[str]:
     return []
 
 
+def _lighten(hex_c: str, f: float = 0.55) -> str:
+    h = hex_c.lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    try:
+        r, g, b = (int(h[i:i + 2], 16) for i in (0, 2, 4))
+    except ValueError:
+        return "#cfe9f4"
+    return "#" + "".join(f"{int(v + (255 - v) * f):02x}" for v in (r, g, b))
+
+
 def main() -> None:
     copy = json.loads((OUT / "copy_output.json").read_text(encoding="utf-8"))
+    design = json.loads((OUT / "design_direction.json").read_text(encoding="utf-8"))
+    pal = design.get("color_palette", {})
+    primary = pal.get("primary", "#1E88B0")
+    tint = _lighten(pal.get("accent", primary), 0.55)
     launch = {"args": ["--no-sandbox", "--force-color-profile=srgb"]}
     if CHROMIUM_PATH:
         launch["executable_path"] = CHROMIUM_PATH
@@ -103,7 +118,7 @@ def main() -> None:
                     "lines": support_lines(sec),
                 },
             }
-            page.set_content(TPL.render(**ctx), wait_until="networkidle")
+            page.set_content(TPL.render(**ctx, primary=primary, tint=tint), wait_until="networkidle")
             out = OUT / f"{i:02d}_{sec['id']}.png"
             page.query_selector(".wrap").screenshot(path=str(out))
             made += 1

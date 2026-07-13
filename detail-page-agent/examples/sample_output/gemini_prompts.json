@@ -1,54 +1,54 @@
 {
   "section_01_hero": {
-    "prompt": "Photorealistic professional Korean beauty advertisement photograph, DSLR, sharp focus, natural realistic skin texture. STRICTLY NOT illustration, NOT cartoon, NOT anime, NOT 3D render, NOT painting. A real Korean female model in her mid-20s with clear dewy skin, gentle smile, holding the product near her cheek. Product: Nature Republic green tea moisture cream — a small frosted light-green glass jar with a green lid and 'NATURE REPUBLIC 어린녹차' label, shown clearly in sharp detail. Fresh green tea leaves, soft morning light, clean mint-green background. Square 1:1. No text overlay, no watermark.",
+    "prompt": "Photorealistic professional Korean beauty advertisement, DSLR, sharp focus, realistic skin. STRICTLY NOT illustration, NOT cartoon, NOT anime, NOT 3D render. MODEL SCENE: a real Korean female model in her mid-20s with fresh dewy hydrated skin and a gentle smile, holding the product near her cheek. PRODUCT (sharp detail): LANOA Aqua Moisture Cream, a frosted light-blue glass jar with a mirror-silver lid and 'LANOA AQUA MOISTURE CREAM' text clearly visible. Cool aqua tones, water droplets, clean light-blue studio. Square 1:1. No text overlay, no watermark.",
     "width": 1200, "height": 1200, "filename": "01_hero.png"
   },
   "section_02_pain": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean woman in her late 20s in soft morning window light, lightly touching her dry cheek with a subtly concerned expression, natural skin showing slight dryness, holding the Nature Republic green tea cream jar (frosted light-green jar, green lid, label visible) in her other hand. Muted calm tones. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic Korean beauty ad, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. MODEL SCENE: a real Korean woman in her late 20s in soft morning light, lightly touching her tight dry cheek with a subtly concerned expression, natural skin showing slight dryness, holding the LANOA aqua cream jar (frosted light-blue jar, silver lid) in her other hand. Cool muted tones. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "02_pain.png"
   },
   "section_03_problem": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model looking at her cheek in a mirror with mild concern, close natural light showing skin texture, the Nature Republic green tea cream jar (light-green frosted jar, label clearly visible) on the vanity in sharp focus. Clean bright bathroom. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic macro beauty photograph, DSLR, extreme detail. NOT illustration, NOT cartoon, NOT 3D. PRODUCT/SKIN MACRO, NO model face: split extreme close-up of skin texture, left side dry and rough, right side hydrated smooth with tiny water droplets, cool aqua-blue lighting, clinical fresh mood. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "03_problem.png"
   },
   "section_04_story": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Side-by-side before/after of the SAME real Korean female model: left half tired dull skin, right half fresh dewy glowing skin, natural light, face clearly visible in both, holding the Nature Republic green tea cream jar (label visible). Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic Korean beauty ad, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. MODEL SCENE: side-by-side before/after of the SAME real Korean female model, left half tired dull dry skin, right half fresh dewy glowing hydrated skin, face clearly visible in both, soft natural light, holding the LANOA aqua cream jar (silver lid) . Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "04_story.png"
   },
   "section_05_solution": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model gently presenting the Nature Republic green tea moisture cream jar with both hands toward the camera, jar in very sharp focus showing the frosted light-green glass, green lid and 'NATURE REPUBLIC 어린녹차' label clearly, soft smile, fresh green tea leaves, clean studio. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic premium product photography, DSLR, ultra sharp macro detail, studio. NOT illustration, NOT cartoon, NOT 3D. PRODUCT HERO, NO people: the LANOA Aqua Moisture Cream jar centered, a frosted light-blue glass jar with mirror-silver lid and 'LANOA AQUA MOISTURE CREAM' text crisp and legible, dynamic clear water splash and droplets around it, cool clean light-blue gradient background, premium commercial quality. Square 1:1. No text overlay, no watermark.",
     "width": 1200, "height": 1200, "filename": "05_solution.png"
   },
   "section_06_how_it_works": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Close-up of a real Korean woman applying green tea moisture cream to her cheek with her fingertip, a dab of white cream visible, the Nature Republic jar (label visible) beside her, clean bright bathroom, soft daylight. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic Korean beauty ad, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. MODEL SCENE: close-up of a real Korean woman applying the aqua gel cream to her cheek with her fingertip, a dab of fresh translucent gel visible, the LANOA jar (silver lid, label) beside her, clean bright bathroom, cool soft daylight. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "06_how_it_works.png"
   },
   "section_07_social_proof": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Three real happy Korean women in their 20s-30s together with clear glowing skin, warm genuine smiles, each holding a Nature Republic green tea cream jar (labels visible), warm natural daylight, clean background. Faces clearly visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic Korean beauty ad, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. MODEL SCENE: three real happy Korean women in their 20s-30s with fresh glowing hydrated skin, warm genuine smiles, each holding a LANOA aqua cream jar (frosted light-blue, silver lid), soft daylight, clean background, faces clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "07_social_proof.png"
   },
   "section_08_authority": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model standing in a lush green tea field in soft daylight, gently holding the Nature Republic green tea moisture cream jar (label clearly visible) toward the camera, natural trustworthy premium brand mood. Face visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic premium product/concept photography, DSLR, sharp detail. NOT illustration, NOT cartoon, NOT 3D. NO people: the LANOA Aqua Moisture Cream jar (frosted light-blue jar, silver lid, label crisp) resting near a calm water surface with gentle ripples and reflections, fresh clean aqua-science mood, cool blue tones. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "08_authority.png"
   },
   "section_09_benefits": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model with fresh hydrated skin and a gentle smile, the Nature Republic green tea cream jar (label visible) and small sample pouches arranged neatly beside her, green natural setting, gift/bonus mood. Face visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic premium product photography, DSLR, ultra sharp. NOT illustration, NOT cartoon, NOT 3D. NO people: the LANOA aqua cream jar with a smooth glossy aqua-gel texture swatch and clear water droplets beside it, small sample pouches arranged neatly, clean light-blue background, gift/bonus mood, product in sharp detail. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "09_benefits.png"
   },
   "section_10_risk_removal": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model holding the Nature Republic green tea cream jar (label clearly visible) with a calm reassured expression and soft smile, soft trustworthy light, clean background. Face clearly visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic premium product photography, DSLR, sharp detail. NOT illustration, NOT cartoon, NOT 3D. NO people: the LANOA Aqua Moisture Cream jar (frosted light-blue jar, mirror-silver lid, 'LANOA AQUA MOISTURE CREAM' text legible) clean and centered on a soft aqua-blue background with a few water droplets, reassuring premium mood. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "10_risk_removal.png"
   },
   "section_11_comparison": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Two side-by-side portraits of the same real Korean female model: left with dull dry skin, right with hydrated glowing skin, the Nature Republic green tea cream jar (label visible) between them, natural light, faces clearly visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic macro beauty photograph, DSLR, extreme detail. NOT illustration, NOT cartoon, NOT 3D. SKIN MACRO, NO face: two side-by-side close-ups of cheek skin, left dry dull and flaky, right hydrated glowing with fine water droplets, cool aqua lighting. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "11_comparison.png"
   },
   "section_12_target_filter": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A warm group photo of a few real everyday Korean people (women and one man) in their 20s-30s with fresh natural skin, friendly genuine smiles, holding Nature Republic green tea cream jars (labels visible), daily-care mood. Faces clearly visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic Korean beauty ad, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. MODEL SCENE: a warm group of a few real everyday Korean people (women and one man) in their 20s-30s with fresh hydrated skin and friendly genuine smiles, holding LANOA aqua cream jars (light-blue, silver lid), daily-care mood, faces clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "12_target_filter.png"
   },
   "section_13_final_cta": {
-    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model with radiant hydrated skin and a gentle confident smile holding the Nature Republic green tea moisture cream jar (frosted light-green jar, label clearly visible) toward the camera, premium aspirational beauty ad glow, soft green background. Face and product clearly visible. Square 1:1. No text, no watermark.",
+    "prompt": "Photorealistic premium product photography, DSLR, ultra sharp macro detail. NOT illustration, NOT cartoon, NOT 3D. PRODUCT HERO, NO people: the LANOA Aqua Moisture Cream jar (frosted light-blue glass, mirror-silver lid, 'LANOA AQUA MOISTURE CREAM' text crisp and legible) with an elegant clear water splash, aspirational premium glow, cool light-blue gradient background. Square 1:1. No text overlay, no watermark.",
     "width": 1200, "height": 1200, "filename": "13_final_cta.png"
   }
 }
