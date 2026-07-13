@@ -3,3 +3,5 @@ playwright>=1.40
 jinja2>=3.1
 pydantic>=2.5
 pillow>=10.0
+# 선택(Gemini 이미지 생성 경로에서만 필요):
+# google-genai>=0.3

@@ -42,6 +42,7 @@ detail-page-agent/
 │   │   ├── design-direction-agent.md     ④ 디자인    (haiku)
 │   │   └── prompt-generator-agent.md     ⑤ 프롬프팅  (sonnet)
 │   └── skills/   ── 에이전트가 쓰는 지식·도구 ──
+│       ├── landing-page-generator/        ★ 메인 오케스트레이터(+ references/prompt.md)
 │       ├── detail-page-blueprint/         13섹션 청사진 + 데이터 규격
 │       ├── detail-page-copy-framework/    세일즈 카피 프레임워크
 │       │     └── references/              13-section-guide · copy-patterns
@@ -51,11 +52,23 @@ detail-page-agent/
 │       │     └── references/gemini-prompt-patterns
 │       ├── architecture-diagram/          구조도 그리기(색상 프리셋·Mermaid)
 │       └── detail-page-render/scripts/render.py   HTML→PNG 렌더(폭 1200px)
+├── CLAUDE.md                             Claude Code 프로젝트 가이드
+├── scripts/                              stitch_images · export_pdf · gemini_api
 ├── examples/sample_output/               예시 데이터(어린녹차)
-├── output/                               최종 PNG 13장이 생기는 곳
+├── output/                               PNG 13장 + final_page.png/.pdf
 ├── render/ · contracts/ · config.py      렌더 엔진·스키마·설정(공용)
 └── main.py                               빠른 데모 실행기
 ```
+
+## 📤 최종 출력 합치기 (PNG / PDF)
+
+섹션 PNG 13장을 한 장으로 이어붙이고 PDF로 내보냅니다(너비 1200px 정규화):
+```bash
+python3 scripts/stitch_images.py output output/final_page.png   # → 1200×~7000px
+python3 scripts/export_pdf.py    output output/final_page.pdf
+```
+(선택) Gemini로 실제 이미지 생성: `GEMINI_API_KEY` 설정 후
+`python3 scripts/gemini_api.py` → `output/sections/` 생성 → 위 스티칭.
 
 ## 🤝 팀은 이렇게 일합니다 (output/ 릴레이)
 
