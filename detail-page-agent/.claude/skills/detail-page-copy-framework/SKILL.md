@@ -55,3 +55,8 @@ urgency(eyebrow): "선착순 100명 50% 할인"
 6. research의 objections를 선제 해소. 과장·허위 금지.
 
 출력 형식·필드 매핑은 detail-page-blueprint의 copy_output.json 규격을 따른다.
+
+## 참고 문헌 (필요 시 열어보기)
+- `references/13-section-guide.md` — 13섹션 구조·목적·높이·체크리스트 상세
+- `references/copy-patterns.md` — 고전환 카피 패턴(헤드라인 5공식, 공감·CTA·
+  긴급성·신뢰·가격·리스크 표현, 번역투 회피 등)

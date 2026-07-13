@@ -54,3 +54,7 @@ final_cta=primary gradient.
 - hero·final_cta는 강한 배경으로 시선을 잡는다.
 
 출력 형식은 detail-page-blueprint의 design_direction.json 규격을 따른다.
+
+## 참고 문헌 (필요 시 열어보기)
+- `references/design-specs.md` — 이미지 사이즈(너비 1200px 고정)·섹션별 높이
+  (총 ~7000px)·프리셋별 컬러/타이포/컴포넌트·배경 교차 패턴·파일 명명 규칙

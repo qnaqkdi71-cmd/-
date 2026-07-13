@@ -44,9 +44,13 @@ detail-page-agent/
 │   └── skills/   ── 에이전트가 쓰는 지식·도구 ──
 │       ├── detail-page-blueprint/         13섹션 청사진 + 데이터 규격
 │       ├── detail-page-copy-framework/    세일즈 카피 프레임워크
+│       │     └── references/              13-section-guide · copy-patterns
 │       ├── detail-page-design-system/     프리셋·팔레트·섹션 배경
+│       │     └── references/design-specs  이미지 사이즈/스타일 스펙(1200px)
 │       ├── image-prompt-authoring/        Gemini 이미지 프롬프트(1200px 실사)
-│       └── detail-page-render/scripts/render.py   HTML→PNG 렌더
+│       │     └── references/gemini-prompt-patterns
+│       ├── architecture-diagram/          구조도 그리기(색상 프리셋·Mermaid)
+│       └── detail-page-render/scripts/render.py   HTML→PNG 렌더(폭 1200px)
 ├── examples/sample_output/               예시 데이터(어린녹차)
 ├── output/                               최종 PNG 13장이 생기는 곳
 ├── render/ · contracts/ · config.py      렌더 엔진·스키마·설정(공용)

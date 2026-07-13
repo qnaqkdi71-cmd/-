@@ -27,7 +27,7 @@ MODELS = {
 }
 
 # ── 렌더 환경 ────────────────────────────────────────────────────────
-PAGE_WIDTH = 860          # 한국형 상세페이지 표준 폭(px)
+PAGE_WIDTH = 1200         # design-specs 규격: 너비 1200px 고정(FULL BLEED)
 DEVICE_SCALE = 2          # 2x 고해상도(레티나) 출력
 FONT_STACK = (
     "'Pretendard', 'Pretendard Variable', 'Apple SD Gothic Neo', "
