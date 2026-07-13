@@ -23,6 +23,15 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# .env 에서 키/모델을 자동 로드 (python-dotenv 있으면)
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(ROOT / ".env")
+except ImportError:
+    pass
+
 OUT = ROOT / "output"
 SECTIONS = OUT / "sections"
 MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")  # 무료 티어 모델

@@ -1,13 +1,37 @@
-__pycache__/
-*.pyc
+# Environment variables (실제 API 키)
 .env
-.venv/
-venv/
-# 생성 산출물(재생성 가능) — examples/의 예시 데이터는 커밋됨
-output/*.png
-output/*.jpg
-output/*.json
-output/*.pdf
-output/*.txt
-output/sections/
+
+# Output folders (생성된 결과물)
+output/*
+output_*/
 !output/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code — 로컬 개인 설정만 제외
+# (주의: 이 프로젝트의 .claude/agents·.claude/skills 는 핵심 산출물이라 저장소에 유지합니다.
+#  통째로 .claude/ 를 무시하면 에이전트/스킬이 사라지므로 아래 로컬 파일만 제외)
+.claude/settings.local.json
+.mcp.json
+.playwright-mcp/
+
+# Logs
+*.log
