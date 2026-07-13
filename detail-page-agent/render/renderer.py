@@ -10,7 +10,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-from config import CHROMIUM_PATH, DEVICE_SCALE, OUTPUT_DIR, PAGE_WIDTH
+from config import CHROMIUM_PATH, DEVICE_SCALE, OUTPUT_DIR, PAGE_HEIGHT, PAGE_WIDTH
 from contracts import RenderPlan
 
 from .templates import render_section_html
@@ -29,7 +29,7 @@ def render_plan(plan: RenderPlan, out_dir: Path | None = None) -> list[Path]:
     with sync_playwright() as p:
         browser = p.chromium.launch(**launch_kwargs)
         page = browser.new_page(
-            viewport={"width": PAGE_WIDTH, "height": 1000},
+            viewport={"width": PAGE_WIDTH, "height": PAGE_HEIGHT},
             device_scale_factor=DEVICE_SCALE,
         )
         for i, section in enumerate(plan.sections, start=1):

@@ -1,54 +1,54 @@
 {
   "section_01_hero": {
-    "prompt": "Create a hero section image. EXACT DIMENSIONS: 1200x800px, FULL BLEED no margins. REALISTIC PHOTOGRAPHY, not illustration. A light-green glass jar of green tea moisture cream with fresh young tea leaves and water droplets on a mint-green surface, soft natural morning light, high-end Korean beauty ad quality (Sulwhasoo/Innisfree). Leave clean space top-left for Korean headline overlay. no text in image.",
-    "width": 1200, "height": 800, "filename": "01_hero.png"
+    "prompt": "Create a hero section image.\n=== CRITICAL REQUIREMENTS ===\n1. EXACT DIMENSIONS: 1200x1200 pixels - MUST be exactly 1200px wide and 1200px tall\n2. FULL BLEED: content fills the ENTIRE 1200x1200 with NO margins or borders\n=== PHOTOGRAPHY STYLE (MANDATORY) ===\nUse REALISTIC PHOTOGRAPHY, NOT illustration. Real Korean female model, mid-20s, clear healthy dewy skin, natural bare-face makeup, gentle smile, holding a small light-green glass jar of green tea moisture cream near her cheek. Soft natural morning light, fresh green tea leaves and water droplets, clean mint-green studio background. High-end Korean beauty ad quality (Sulwhasoo/Innisfree/Laneige). Natural skin texture. Leave clean upper-left space for Korean headline overlay. no text in image.\n=== FINAL CHECKLIST ===\nExactly 1200x1200, full bleed, realistic photo of a real person's face, no text.",
+    "width": 1200, "height": 1200, "filename": "01_hero.png"
   },
   "section_02_pain": {
-    "prompt": "Create a pain-points section. 1200x600px full bleed. Realistic photo style. A woman touching her dry cheek in soft window light, subtle concerned expression, natural skin texture, muted calm tones. Space for 3 Korean pain-point cards. no text.",
-    "width": 1200, "height": 600, "filename": "02_pain.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY (not illustration). A real Korean woman in her late 20s in soft window light, lightly touching her dry cheek with a subtly concerned expression, natural skin texture showing slight dryness, calm muted tones, morning bedroom. Real human face clearly visible. Korean beauty ad quality. no text.",
+    "width": 1200, "height": 1200, "filename": "02_pain.png"
   },
   "section_03_problem": {
-    "prompt": "Create a problem section. 1200x500px full bleed. Realistic photo. Close-up of dry flaky skin texture transitioning to hydrated skin, clean clinical-but-warm mood. no text.",
-    "width": 1200, "height": 500, "filename": "03_problem.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Extreme close-up of a real Korean woman's cheek/jaw skin, left side dry and flaky, right side hydrated and smooth, natural daylight, clinical-but-warm mood. Real skin, no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "03_problem.png"
   },
   "section_04_story": {
-    "prompt": "Create a before/after section. 1200x700px full bleed. Realistic split composition: left dull tired morning skin, right fresh dewy morning skin, same real model, natural light, no text.",
-    "width": 1200, "height": 700, "filename": "04_story.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Before/after portrait of the SAME real Korean female model: left half tired dull morning skin, right half fresh dewy glowing skin, natural light, face clearly visible in both. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "04_story.png"
   },
   "section_05_solution": {
-    "prompt": "Create a solution intro. 1200x400px full bleed. Realistic hero product shot of the green tea moisture cream jar centered on deep green background, premium soft studio lighting. no text.",
-    "width": 1200, "height": 400, "filename": "05_solution.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Premium product hero of the light-green green tea moisture cream jar (55ml) centered on deep green background, fresh tea leaf, soft studio lighting, no people. no text.",
+    "width": 1200, "height": 1200, "filename": "05_solution.png"
   },
   "section_06_how_it_works": {
-    "prompt": "Create a how-to section. 1200x600px full bleed. Realistic 3-step hand sequence applying cream, clean bright bathroom setting, soft daylight. Space for 3 Korean step captions. no text.",
-    "width": 1200, "height": 600, "filename": "06_how_it_works.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman applying green tea moisture cream to her face with fingertips, three natural steps feel, clean bright bathroom, soft daylight, real face and hands visible. Korean beauty ad quality. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "06_how_it_works.png"
   },
   "section_07_social_proof": {
-    "prompt": "Create a testimonials section. 1200x800px full bleed. Realistic warm lifestyle photo of diverse happy customers with clear skin, space for stat number and 3 review cards. no text.",
-    "width": 1200, "height": 800, "filename": "07_social_proof.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Warm lifestyle photo of 2-3 real Korean female customers, mid 20s-30s, happy natural smiles with clear glowing skin, holding the green tea cream, soft daylight. Real faces clearly visible. Space for review cards. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "07_social_proof.png"
   },
   "section_08_authority": {
-    "prompt": "Create an about-brand section. 1200x500px full bleed. Realistic photo of green tea field / natural botanical lab, trustworthy premium natural-brand mood, space for brand story. no text.",
-    "width": 1200, "height": 500, "filename": "08_authority.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Lush green tea field / natural botanical mood with the product jar on a wooden surface, trustworthy premium natural-brand atmosphere, soft light. no people, no text.",
+    "width": 1200, "height": 1200, "filename": "08_authority.png"
   },
   "section_09_benefits": {
-    "prompt": "Create a benefits section. 1200x700px full bleed. Realistic flat-lay of the cream jar with fresh tea leaves and small sample pouches on green background, gift/bonus mood. no text.",
-    "width": 1200, "height": 700, "filename": "09_benefits.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman with fresh hydrated skin gently smiling, product jar and small sample pouches beside her, green natural setting, gift/bonus mood. Real face visible. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "09_benefits.png"
   },
   "section_10_risk_removal": {
-    "prompt": "Create a guarantee section. 1200x500px full bleed. Realistic clean product-in-hand photo conveying safety and trust, soft reassuring light, space for guarantee and FAQ. no text.",
-    "width": 1200, "height": 500, "filename": "10_risk_removal.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman holding the cream jar with a calm reassured expression, soft trustworthy light, face visible. Conveys safety and easy returns. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "10_risk_removal.png"
   },
   "section_11_comparison": {
-    "prompt": "Create a with/without comparison. 1200x400px full bleed. Realistic two-column skin comparison, left hydrated glowing, right dry dull, no text.",
-    "width": 1200, "height": 400, "filename": "11_comparison.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Two-column real skin comparison of the same Korean model: left hydrated glowing cheek, right dry dull cheek, natural light, faces/skin clearly visible. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "11_comparison.png"
   },
   "section_12_target_filter": {
-    "prompt": "Create a target-audience section. 1200x400px full bleed. Realistic warm photo of everyday people (men and women) with fresh skin, inclusive daily-care mood, no text.",
-    "width": 1200, "height": 400, "filename": "12_target_filter.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Warm inclusive photo of a few real everyday Korean people (women and a man) mid 20s-30s with fresh natural skin, friendly faces clearly visible, daily-care mood. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "12_target_filter.png"
   },
   "section_13_final_cta": {
-    "prompt": "Create a final CTA section. 1200x600px full bleed. Realistic premium product beauty shot of the green tea cream jar on gradient green background, aspirational glow, space for headline/price/CTA button. no text.",
-    "width": 1200, "height": 600, "filename": "13_final_cta.png"
+    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean female model with radiant hydrated skin holding the green tea cream jar, aspirational gentle smile, gradient green background, premium beauty ad glow. Real face visible, space for headline/price/CTA. no illustration, no text.",
+    "width": 1200, "height": 1200, "filename": "13_final_cta.png"
   }
 }

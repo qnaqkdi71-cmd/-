@@ -8,7 +8,7 @@ from __future__ import annotations
 from jinja2 import Environment
 from markupsafe import Markup, escape
 
-from config import FONT_STACK, PAGE_WIDTH
+from config import FONT_STACK, PAGE_HEIGHT, PAGE_WIDTH
 
 
 def _nl2br(value) -> Markup:
@@ -34,8 +34,10 @@ _BASE = env.from_string("""<!doctype html><html lang="ko"><head><meta charset="u
   html,body { width:{{width}}px; }
   body { font-family:{{font}}; -webkit-font-smoothing:antialiased;
          text-rendering:optimizeLegibility; }
-  .section { width:{{width}}px; background:{{bg}}; color:{{text}};
-             padding:78px 56px; position:relative; overflow:hidden; }
+  .section { width:{{width}}px; height:{{height}}px; background:{{bg}};
+             color:{{text}}; padding:80px 72px; position:relative;
+             overflow:hidden; display:flex; flex-direction:column;
+             justify-content:center; }
   .eyebrow { font-size:14px; font-weight:800; letter-spacing:.16em;
              text-transform:uppercase; color:{{accent}}; margin-bottom:16px; }
   .headline { font-size:42px; line-height:1.26; font-weight:800;
@@ -402,7 +404,7 @@ def render_section_html(section, flip: bool = False, brand: str = "") -> str:
     body_tpl = _T.get(section.template, _T["solution"])
     body = body_tpl.render(s=section, flip=flip, brand=brand)
     return _BASE.render(
-        width=PAGE_WIDTH, font=FONT_STACK,
+        width=PAGE_WIDTH, height=PAGE_HEIGHT, font=FONT_STACK,
         bg=section.bg, text=section.text, accent=section.accent,
         body=Markup(body),
     )

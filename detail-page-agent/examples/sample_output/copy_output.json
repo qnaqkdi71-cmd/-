@@ -2,9 +2,9 @@
   "sections": [
     {
       "id": "hero",
-      "eyebrow": "NATURE REPUBLIC · 어린녹차",
+      "eyebrow": "NATURE REPUBLIC · 어린녹차 · ★4.75",
       "headline": "순한 어린 녹차로\n하루의 수분을 채우다",
-      "subheadline": "건조하고 예민한 피부를 위한 데일리 수분 크림",
+      "subheadline": "건조하고 예민한 피부를 위한 55ml 데일리 수분 크림",
       "body": [], "highlight": "", "items": []
     },
     {
@@ -38,7 +38,7 @@
       "headline": "딱 한 단계로\n달라진 아침",
       "subheadline": "",
       "body": [],
-      "highlight": "558명이 남긴 실사용 변화",
+      "highlight": "568건 리뷰 · 평점 ★4.75",
       "items": [
         {"text": "자고 일어나면 볼이 당기고 화장이 들뜨던 아침"},
         {"text": "순한 수분막으로 촉촉하게 정돈되어 결이 매끈한 아침"}
@@ -47,8 +47,8 @@
     {
       "id": "solution",
       "eyebrow": "그래서, 어린 녹차",
-      "headline": "어린녹차 수분 크림",
-      "subheadline": "여린 녹차 잎의 순한 수분을 담은 데일리 마무리 크림",
+      "headline": "어린녹차 순한 크림",
+      "subheadline": "여린 녹차 잎의 순한 수분을 담은 55ml 데일리 마무리 크림",
       "body": [
         "예민해지기 쉬운 피부에 순하게",
         "산뜻하게 스며드는 가벼운 제형",
@@ -70,12 +70,12 @@
     {
       "id": "social_proof",
       "eyebrow": "REAL REVIEW",
-      "headline": "이미 검증된 사용감",
-      "subheadline": "실사용 후기",
+      "headline": "리뷰 568건이 증명합니다",
+      "subheadline": "누적 리뷰 · 최근 6개월 평점 4.86",
       "body": [],
-      "highlight": "558+",
+      "highlight": "★4.75",
       "items": [
-        {"name": "이", "stars": 5, "text": "산뜻한데 촉촉해서 아침에 발라도 밀리지 않아요."},
+        {"name": "이", "stars": 5, "text": "산뜻한데 촉촉해서 아침에 발라도 밀리지 않아요. 벌써 두 번째예요."},
         {"name": "김", "stars": 5, "text": "녹차 향이 은은하고 자극 없이 순해서 매일 씁니다."},
         {"name": "박", "stars": 4, "text": "끈적임 없이 흡수돼서 남편이랑 같이 쓰기 좋아요."}
       ]
@@ -157,12 +157,12 @@
       "id": "final_cta",
       "eyebrow": "지금 만나보세요",
       "headline": "매일의 수분,\n어린 녹차로",
-      "subheadline": "산뜻하게 스며드는 데일리 수분 크림",
-      "highlight": "",
+      "subheadline": "55ml · 10ml당 1,436원",
+      "highlight": "7,900원",
       "body": [
-        "기초 케어 마지막, 부담 없는 수분 마무리",
-        "모든 피부 · 아침저녁 데일리",
-        "558건의 후기로 검증된 사용감"
+        "15,000원 이상 무료배송 · 오늘출발 14:00 마감",
+        "평점 ★4.75 · 568건 리뷰",
+        "기초 케어 마지막, 부담 없는 수분 마무리"
       ],
       "items": []
     }

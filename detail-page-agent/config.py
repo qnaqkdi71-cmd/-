@@ -28,7 +28,8 @@ MODELS = {
 
 # ── 렌더 환경 ────────────────────────────────────────────────────────
 PAGE_WIDTH = 1200         # design-specs 규격: 너비 1200px 고정(FULL BLEED)
-DEVICE_SCALE = 2          # 2x 고해상도(레티나) 출력
+PAGE_HEIGHT = 1200        # 세로도 1200px 고정 → 모든 섹션 정사각 1200×1200
+DEVICE_SCALE = 1          # 정확히 1200×1200 픽셀로 출력
 FONT_STACK = (
     "'Pretendard', 'Pretendard Variable', 'Apple SD Gothic Neo', "
     "'Noto Sans KR', 'Noto Sans CJK KR', 'Malgun Gothic', sans-serif"
