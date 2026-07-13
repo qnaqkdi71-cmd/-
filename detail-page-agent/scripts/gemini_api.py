@@ -6,11 +6,13 @@ scripts/stitch_images.py로 이어붙인다.
 
 전제:
   pip install google-genai pillow
-  export GEMINI_API_KEY=...            # 필수
-  export GEMINI_IMAGE_MODEL=...        # 선택(기본: gemini-3-pro-image-preview)
+  export GEMINI_API_KEY=...            # 필수(무료 발급: aistudio.google.com)
+  export GEMINI_IMAGE_MODEL=...        # 선택(기본: gemini-2.5-flash-image = 무료 티어)
 
-주의: 이미지 모델 id/응답 형식은 제공자 업데이트에 따라 달라질 수 있어,
-키를 넣고 한 번 확인 후 사용하세요. 키가 없으면 안내만 출력하고 종료합니다.
+기본 모델은 무료 티어가 있는 Nano Banana(gemini-2.5-flash-image)입니다.
+더 높은 품질은 GEMINI_IMAGE_MODEL=gemini-3-pro-image-preview(유료)로 바꾸세요.
+주의: 모델 id/응답 형식은 제공자 업데이트로 달라질 수 있습니다.
+키가 없으면 안내만 출력하고 종료합니다.
 """
 from __future__ import annotations
 
@@ -23,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 SECTIONS = OUT / "sections"
-MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image-preview")
+MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")  # 무료 티어 모델
 
 
 def _load_prompts() -> dict:
@@ -64,7 +66,13 @@ def main() -> None:
             continue
         print(f"· 생성 중: {filename}")
         try:
-            resp = client.models.generate_content(model=MODEL, contents=[prompt])
+            try:  # 이미지 출력 모달리티 요청(지원 시)
+                from google.genai import types  # type: ignore
+                cfg = types.GenerateContentConfig(response_modalities=["IMAGE"])
+                resp = client.models.generate_content(
+                    model=MODEL, contents=[prompt], config=cfg)
+            except (ImportError, TypeError, ValueError):
+                resp = client.models.generate_content(model=MODEL, contents=[prompt])
             saved = False
             for cand in getattr(resp, "candidates", []) or []:
                 for part in getattr(cand.content, "parts", []) or []:
