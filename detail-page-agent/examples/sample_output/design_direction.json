@@ -1,13 +1,13 @@
 {
   "style_preset": "premium",
   "color_palette": {
-    "primary": "#1E88B0",
-    "secondary": "#5FC5DE",
-    "accent": "#3FB5D6",
+    "primary": "#9A2A4D",
+    "secondary": "#6E4E97",
+    "accent": "#B8578A",
     "background": "#ffffff",
-    "background_alt": "#eaf6fb",
-    "text_primary": "#10323f",
-    "text_secondary": "#4a6b76"
+    "background_alt": "#f6eef3",
+    "text_primary": "#2a1622",
+    "text_secondary": "#6b5560"
   },
   "typography": {
     "headline": {"font_weight": "bold"},

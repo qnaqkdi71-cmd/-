@@ -1,17 +1,17 @@
 {
-  "product_name": "라노아 아쿠아 모이스처 크림",
-  "brand": "LANOA",
-  "one_liner": "속당김까지 시원하게 채우는 아쿠아 수분 크림",
-  "target_audience": "겉은 번들거리고 속은 당기는 수분 불균형 피부에 산뜻한 수분을 원하는 사용자",
-  "main_problem": "겉수분만 채워져 속당김이 반복되는 수분 부족",
-  "key_benefit": "속까지 시원하게 스며들어 끈적임 없이 촉촉하게 마무리",
-  "price": {"original": "", "discounted": "", "currency": "KRW", "volume": ""},
+  "product_name": "쿤달 탈모케어 샴푸 & 허니 트리트먼트 세트",
+  "brand": "KUNDAL",
+  "one_liner": "두피는 탈모 케어, 모발은 영양 충전하는 헤어 듀오 세트",
+  "target_audience": "머리가 많이 빠지고 모발이 푸석해 두피와 모발을 한 번에 케어하고 싶은 사용자",
+  "main_problem": "빠지는 두피와 상한 모발을 따로따로 관리하기 번거로움",
+  "key_benefit": "카페인 탈모케어 샴푸로 두피를, 허니·마카다미아 트리트먼트로 모발을 동시에 케어",
+  "price": {"original": "", "discounted": "", "currency": "KRW", "volume": "각 500ml"},
   "urgency": {"type": "", "value": "", "bonus": ""},
   "rating": {"score": "", "recent_6m": "", "review_count": ""},
   "testimonials": [],
-  "creator_bio": "수분에 집중한 스킨케어 브랜드 라노아(LANOA)",
+  "creator_bio": "향과 성분에 집중한 헤어·바디 브랜드 쿤달(KUNDAL)",
   "bonus_items": [],
   "guarantee": "개봉 전 7일 이내 교환·반품",
   "faq": [],
-  "brand_color": {"primary": "#1E88B0", "secondary": "#5FC5DE"}
+  "brand_color": {"primary": "#9A2A4D", "secondary": "#6E4E97"}
 }
