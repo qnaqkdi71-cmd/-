@@ -7,5 +7,6 @@ venv/
 output/*.png
 output/*.json
 output/*.pdf
+output/*.txt
 output/sections/
 !output/.gitkeep
