@@ -5,6 +5,7 @@ __pycache__/
 venv/
 # 생성 산출물(재생성 가능) — examples/의 예시 데이터는 커밋됨
 output/*.png
+output/*.jpg
 output/*.json
 output/*.pdf
 output/*.txt

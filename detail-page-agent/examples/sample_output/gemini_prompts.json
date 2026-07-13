@@ -1,54 +1,54 @@
 {
   "section_01_hero": {
-    "prompt": "Create a hero section image.\n=== CRITICAL REQUIREMENTS ===\n1. EXACT DIMENSIONS: 1200x1200 pixels - MUST be exactly 1200px wide and 1200px tall\n2. FULL BLEED: content fills the ENTIRE 1200x1200 with NO margins or borders\n=== PHOTOGRAPHY STYLE (MANDATORY) ===\nUse REALISTIC PHOTOGRAPHY, NOT illustration. Real Korean female model, mid-20s, clear healthy dewy skin, natural bare-face makeup, gentle smile, holding a small light-green glass jar of green tea moisture cream near her cheek. Soft natural morning light, fresh green tea leaves and water droplets, clean mint-green studio background. High-end Korean beauty ad quality (Sulwhasoo/Innisfree/Laneige). Natural skin texture. Leave clean upper-left space for Korean headline overlay. no text in image.\n=== FINAL CHECKLIST ===\nExactly 1200x1200, full bleed, realistic photo of a real person's face, no text.",
+    "prompt": "Photorealistic professional Korean beauty advertisement photograph, DSLR, sharp focus, natural realistic skin texture. STRICTLY NOT illustration, NOT cartoon, NOT anime, NOT 3D render, NOT painting. A real Korean female model in her mid-20s with clear dewy skin, gentle smile, holding the product near her cheek. Product: Nature Republic green tea moisture cream — a small frosted light-green glass jar with a green lid and 'NATURE REPUBLIC 어린녹차' label, shown clearly in sharp detail. Fresh green tea leaves, soft morning light, clean mint-green background. Square 1:1. No text overlay, no watermark.",
     "width": 1200, "height": 1200, "filename": "01_hero.png"
   },
   "section_02_pain": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY (not illustration). A real Korean woman in her late 20s in soft window light, lightly touching her dry cheek with a subtly concerned expression, natural skin texture showing slight dryness, calm muted tones, morning bedroom. Real human face clearly visible. Korean beauty ad quality. no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean woman in her late 20s in soft morning window light, lightly touching her dry cheek with a subtly concerned expression, natural skin showing slight dryness, holding the Nature Republic green tea cream jar (frosted light-green jar, green lid, label visible) in her other hand. Muted calm tones. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "02_pain.png"
   },
   "section_03_problem": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Extreme close-up of a real Korean woman's cheek/jaw skin, left side dry and flaky, right side hydrated and smooth, natural daylight, clinical-but-warm mood. Real skin, no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model looking at her cheek in a mirror with mild concern, close natural light showing skin texture, the Nature Republic green tea cream jar (light-green frosted jar, label clearly visible) on the vanity in sharp focus. Clean bright bathroom. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "03_problem.png"
   },
   "section_04_story": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Before/after portrait of the SAME real Korean female model: left half tired dull morning skin, right half fresh dewy glowing skin, natural light, face clearly visible in both. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Side-by-side before/after of the SAME real Korean female model: left half tired dull skin, right half fresh dewy glowing skin, natural light, face clearly visible in both, holding the Nature Republic green tea cream jar (label visible). Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "04_story.png"
   },
   "section_05_solution": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Premium product hero of the light-green green tea moisture cream jar (55ml) centered on deep green background, fresh tea leaf, soft studio lighting, no people. no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model gently presenting the Nature Republic green tea moisture cream jar with both hands toward the camera, jar in very sharp focus showing the frosted light-green glass, green lid and 'NATURE REPUBLIC 어린녹차' label clearly, soft smile, fresh green tea leaves, clean studio. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "05_solution.png"
   },
   "section_06_how_it_works": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman applying green tea moisture cream to her face with fingertips, three natural steps feel, clean bright bathroom, soft daylight, real face and hands visible. Korean beauty ad quality. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Close-up of a real Korean woman applying green tea moisture cream to her cheek with her fingertip, a dab of white cream visible, the Nature Republic jar (label visible) beside her, clean bright bathroom, soft daylight. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "06_how_it_works.png"
   },
   "section_07_social_proof": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Warm lifestyle photo of 2-3 real Korean female customers, mid 20s-30s, happy natural smiles with clear glowing skin, holding the green tea cream, soft daylight. Real faces clearly visible. Space for review cards. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Three real happy Korean women in their 20s-30s together with clear glowing skin, warm genuine smiles, each holding a Nature Republic green tea cream jar (labels visible), warm natural daylight, clean background. Faces clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "07_social_proof.png"
   },
   "section_08_authority": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Lush green tea field / natural botanical mood with the product jar on a wooden surface, trustworthy premium natural-brand atmosphere, soft light. no people, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model standing in a lush green tea field in soft daylight, gently holding the Nature Republic green tea moisture cream jar (label clearly visible) toward the camera, natural trustworthy premium brand mood. Face visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "08_authority.png"
   },
   "section_09_benefits": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman with fresh hydrated skin gently smiling, product jar and small sample pouches beside her, green natural setting, gift/bonus mood. Real face visible. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model with fresh hydrated skin and a gentle smile, the Nature Republic green tea cream jar (label visible) and small sample pouches arranged neatly beside her, green natural setting, gift/bonus mood. Face visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "09_benefits.png"
   },
   "section_10_risk_removal": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean woman holding the cream jar with a calm reassured expression, soft trustworthy light, face visible. Conveys safety and easy returns. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model holding the Nature Republic green tea cream jar (label clearly visible) with a calm reassured expression and soft smile, soft trustworthy light, clean background. Face clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "10_risk_removal.png"
   },
   "section_11_comparison": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Two-column real skin comparison of the same Korean model: left hydrated glowing cheek, right dry dull cheek, natural light, faces/skin clearly visible. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. Two side-by-side portraits of the same real Korean female model: left with dull dry skin, right with hydrated glowing skin, the Nature Republic green tea cream jar (label visible) between them, natural light, faces clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "11_comparison.png"
   },
   "section_12_target_filter": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. Warm inclusive photo of a few real everyday Korean people (women and a man) mid 20s-30s with fresh natural skin, friendly faces clearly visible, daily-care mood. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A warm group photo of a few real everyday Korean people (women and one man) in their 20s-30s with fresh natural skin, friendly genuine smiles, holding Nature Republic green tea cream jars (labels visible), daily-care mood. Faces clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "12_target_filter.png"
   },
   "section_13_final_cta": {
-    "prompt": "1200x1200 full bleed, REALISTIC PHOTOGRAPHY. A real Korean female model with radiant hydrated skin holding the green tea cream jar, aspirational gentle smile, gradient green background, premium beauty ad glow. Real face visible, space for headline/price/CTA. no illustration, no text.",
+    "prompt": "Photorealistic Korean beauty ad photograph, DSLR, realistic skin. NOT illustration, NOT cartoon, NOT 3D. A real Korean female model with radiant hydrated skin and a gentle confident smile holding the Nature Republic green tea moisture cream jar (frosted light-green jar, label clearly visible) toward the camera, premium aspirational beauty ad glow, soft green background. Face and product clearly visible. Square 1:1. No text, no watermark.",
     "width": 1200, "height": 1200, "filename": "13_final_cta.png"
   }
 }
