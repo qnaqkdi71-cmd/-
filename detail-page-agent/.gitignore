@@ -1,6 +1,12 @@
 # Environment variables (실제 API 키)
 .env
 
+# Google Cloud 서비스 계정 키 (절대 커밋 금지!)
+vertex-key.json
+*-service-account*.json
+*.credentials.json
+gcp-*.json
+
 # Output folders (생성된 결과물)
 output/*
 output_*/

@@ -39,14 +39,35 @@ def _square_1200(data: bytes) -> Image.Image:
         (1200, 1200), Image.LANCZOS)
 
 
-def main() -> None:
-    if not os.getenv("GEMINI_API_KEY"):
-        print("GEMINI_API_KEY 가 없습니다 (.env 또는 환경변수).")
-        sys.exit(1)
+def _make_client():
+    """Vertex(무료 크레딧) 우선, 없으면 AI Studio API 키."""
     from google import genai
+
+    use_vertex = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("true", "1", "yes")
+    if use_vertex:
+        project = os.getenv("GOOGLE_CLOUD_PROJECT")
+        location = os.getenv("GOOGLE_CLOUD_LOCATION", "global")
+        if not project:
+            print("GOOGLE_CLOUD_PROJECT 가 없습니다 (.env).")
+            sys.exit(1)
+        # GOOGLE_APPLICATION_CREDENTIALS 는 상대경로면 ROOT 기준으로 보정
+        cred = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        if cred and not os.path.isabs(cred):
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str((ROOT / cred).resolve())
+        print(f"인증: Vertex AI · project={project} · location={location} (무료 크레딧)")
+        return genai.Client(vertexai=True, project=project, location=location)
+
+    if not os.getenv("GEMINI_API_KEY"):
+        print("인증 정보가 없습니다: Vertex(GOOGLE_GENAI_USE_VERTEXAI) 또는 GEMINI_API_KEY 필요.")
+        sys.exit(1)
+    print("인증: AI Studio API 키")
+    return genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+
+def main() -> None:
     from google.genai import types
 
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    client = _make_client()
     prompts = json.loads((OUT / "gemini_prompts.json").read_text(encoding="utf-8"))
     print(f"모델: {MODEL} · {len(prompts)}개 섹션 생성")
 
