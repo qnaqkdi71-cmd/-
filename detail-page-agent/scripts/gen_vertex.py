@@ -21,7 +21,7 @@ from google.genai import types
 from PIL import Image
 
 OUT = ROOT / "output"
-MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image-preview")
+MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image")
 
 
 def square1200(data: bytes) -> Image.Image:
