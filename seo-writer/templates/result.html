@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}{{ keyword }} — 결과{% endblock %}
+{% block content %}
+
+<div class="result-head">
+  <a href="/" class="back">← 새로 시작</a>
+  <h1>“{{ keyword }}”</h1>
+  <div class="tags">
+    <span class="tag">의도: {{ intent }}</span>
+    <span class="tag">{{ gen_status }}</span>
+  </div>
+</div>
+
+<!-- 1. 경쟁 분석 -->
+<section class="card">
+  <h2>1 · 이길 수 있는 싸움인가?</h2>
+  <div class="verdict-row">
+    {% if verdict %}
+      <div class="verdict tone-{{ verdict.tone }}">
+        <div class="vnum">{{ "{:,}".format(verdict.count) }}</div>
+        <div class="vlabel">{{ verdict.label }}</div>
+      </div>
+      <p class="vhint">{{ verdict.hint }}</p>
+    {% else %}
+      <div class="verdict tone-manual"><div class="vlabel">수동 확인</div></div>
+      <p class="vhint">
+        {{ report.note }}<br />
+        <a class="ext" href="{{ report.allintitle_url }}" target="_blank" rel="noopener">
+          👉 allintitle로 실경쟁자 수 확인하기 ↗
+        </a>
+      </p>
+    {% endif %}
+  </div>
+
+  {% if report.top_results %}
+  <h3 class="sub">현재 상위 글 (이들보다 유용하게 써야 이깁니다)</h3>
+  <ol class="toplist">
+    {% for r in report.top_results %}
+    <li><a href="{{ r.link }}" target="_blank" rel="noopener">{{ r.title }}</a>
+      {% if r.snippet %}<span class="snip">{{ r.snippet }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  <h3 class="sub">이길 만한 롱테일 후보 (allintitle로 경쟁 확인)</h3>
+  <div class="tbl">
+    <table>
+      <tr><th>키워드</th><th>의도</th><th>경쟁 확인</th></tr>
+      {% for c in candidates %}
+      <tr>
+        <td>{{ c.keyword }}</td>
+        <td><span class="mini">{{ c.intent }}</span></td>
+        <td><a class="ext" href="{{ c.allintitle_url }}" target="_blank" rel="noopener">allintitle ↗</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</section>
+
+<!-- 2. SEO 점수 -->
+<section class="card">
+  <h2>2 · 온페이지 SEO 점수</h2>
+  <div class="score-row">
+    <div class="ring" style="--p: {{ score.score }}">
+      <div class="ring-in"><b>{{ score.score }}</b><span>/100 · {{ score.grade }}</span></div>
+    </div>
+    <div class="score-side">
+      <p class="note">{{ score.note }}</p>
+      <ul class="checks">
+        {% for c in score.checks %}
+        <li class="{{ 'ok' if c.ok else 'no' }}">
+          <span class="mk">{{ '✓' if c.ok else '✕' }}</span>{{ c.label }}
+          {% if not c.ok and c.tip %}<em>{{ c.tip }}</em>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 생성된 글 -->
+<section class="card">
+  <h2>3 · 작성된 글 {% if article.is_skeleton %}<span class="mini warn">골격(AI 미연결)</span>{% endif %}</h2>
+
+  <div class="meta-grid">
+    <div><span class="k">타이틀 태그</span><span class="v">{{ article.title_tag }}</span></div>
+    <div><span class="k">메타 설명</span><span class="v">{{ article.meta_description }}</span></div>
+    <div><span class="k">URL</span><span class="v code">{{ onpage.url_example }}</span></div>
+  </div>
+
+  <article class="doc">
+    <h1>{{ article.h1 }}</h1>
+    {% if article.intro %}<p class="intro">{{ article.intro }}</p>{% endif %}
+    {{ body_html | safe }}
+
+    {% if article.faq %}
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    {% for f in article.faq %}
+    <details class="faq"><summary>{{ f.question }}</summary><p>{{ f.answer }}</p></details>
+    {% endfor %}
+    {% endif %}
+  </article>
+
+  <details class="copybox">
+    <summary>📋 마크다운 원문 복사</summary>
+    <textarea readonly rows="12">{{ article.body_markdown }}</textarea>
+  </details>
+</section>
+
+<!-- 4. 온페이지 팩 -->
+<section class="card">
+  <h2>4 · 온페이지 세팅 (5대 태그 + 구조화 데이터)</h2>
+  <ul class="onpage">
+    <li><b>타이틀</b> ({{ onpage.title_len }}자): {{ onpage.title_tag }}</li>
+    <li><b>메타설명</b> ({{ onpage.meta_len }}자): {{ onpage.meta_description }}</li>
+    <li><b>슬러그</b>: <code>{{ onpage.slug }}</code></li>
+    <li><b>H1</b>: {{ onpage.h1 }}</li>
+    <li><b>H2 소제목</b>: {{ onpage.headings | join(" · ") }}</li>
+    <li><b>이미지 alt</b>: {{ onpage.image_alts | join(" / ") }}</li>
+    <li><b>앵커텍스트</b>: ✅ “{{ onpage.anchor_good }}” &nbsp; ❌ “{{ onpage.anchor_bad }}”</li>
+  </ul>
+  <details class="copybox">
+    <summary>구조화 데이터(JSON-LD) — &lt;head&gt;에 넣으면 좋아요</summary>
+    <textarea readonly rows="10">{{ onpage.json_ld }}</textarea>
+  </details>
+</section>
+
+<!-- 5. 배포 플랜 -->
+<section class="card">
+  <h2>5 · 소셜 SEO 배포 플랜 (권위 앞당기기)</h2>
+  <ol class="plan">
+    {% for step in plan %}<li>{{ step }}</li>{% endfor %}
+  </ol>
+</section>
+
+<div class="center"><a href="/" class="btn ghost">← 다른 키워드로 다시</a></div>
+{% endblock %}

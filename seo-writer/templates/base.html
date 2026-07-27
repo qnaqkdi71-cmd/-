@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}구글 상위노출 글 자동작성기{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap bar">
+      <a href="/" class="brand"><span class="logo">↑</span> 랭크업 · 글 자동작성기</a>
+      <div class="pill-group">
+        <span class="pill {{ 'on' if status.llm_ready else 'off' }}">AI: {{ status.llm_label }}</span>
+        <span class="pill {{ 'on' if status.serp_ready else 'off' }}">
+          경쟁분석: {{ 'Serper 연결' if status.serp_ready else '수동 모드' }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      학습·참고용 도구입니다. 순위는 구글 알고리즘·경쟁·사이트 권위에 따라 달라질 수 있어요 ·
+      키는 <code>.env</code>에만 저장(깃 제외)됩니다.
+    </div>
+  </footer>
+</body>
+</html>

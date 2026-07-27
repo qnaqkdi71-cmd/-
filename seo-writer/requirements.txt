@@ -1,0 +1,17 @@
+# 웹 서버
+fastapi>=0.110
+uvicorn[standard]>=0.29
+jinja2>=3.1
+python-multipart>=0.0.9
+
+# HTTP (SERP API 호출)
+httpx>=0.27
+
+# .env 로 API 키 관리
+python-dotenv>=1.0
+
+# AI 글쓰기 엔진 (무료: Gemini)
+google-genai>=0.3
+
+# (선택) 나중에 Claude로 전환 시 주석 해제
+# anthropic>=0.39
