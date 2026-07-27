@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request
@@ -17,7 +18,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
 
 from seo.keywords import generate_keywords          # noqa: E402
 from seo.llm import LLM                              # noqa: E402
@@ -33,8 +35,8 @@ from seo.pipeline import (                           # noqa: E402
 )
 
 app = FastAPI(title="구글 상위노출 글 자동작성기")
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 INTENTS = ["자동 감지", "정보형", "거래형", "탐색형"]
 
