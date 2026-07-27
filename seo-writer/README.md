@@ -27,7 +27,7 @@ uvicorn app:app --reload
    ```
    LLM_PROVIDER=gemini
    GEMINI_API_KEY=여기에_키
-   GEMINI_MODEL=gemini-2.0-flash     # 모델 에러 시 gemini-2.5-flash / gemini-1.5-flash 로 변경
+   GEMINI_MODEL=gemini-2.5-flash     # 무료는 Flash 계열만 · Pro(유료/크레딧)는 gemini-2.5-pro
    ```
 3. 서버 재시작 → 이제 실제 글이 작성됩니다.
 

@@ -32,7 +32,7 @@ class LLM:
     @property
     def label(self) -> str:
         if self.provider == "gemini":
-            return f"Gemini ({os.getenv('GEMINI_MODEL', 'gemini-2.0-flash')})"
+            return f"Gemini ({os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')})"
         if self.provider == "claude":
             return f"Claude ({os.getenv('ANTHROPIC_MODEL', 'claude-sonnet-5')})"
         return "없음 (골격만)"
@@ -50,7 +50,7 @@ class LLM:
         key = os.getenv("GEMINI_API_KEY")
         if not key:
             raise LLMError("GEMINI_API_KEY 가 없습니다. .env에 넣어주세요.")
-        model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         try:
             from google import genai  # lazy import
         except ImportError as e:
