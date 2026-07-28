@@ -29,9 +29,31 @@ class GeneratedImage:
 
 def image_status() -> dict:
     provider = (os.getenv("IMAGE_PROVIDER") or "none").strip().lower()
-    ready = provider == "gemini" and bool(os.getenv("GEMINI_API_KEY"))
+    if provider == "vertex":
+        ready = bool(os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GEMINI_VERTEX_PROJECT"))
+    else:
+        ready = provider == "gemini" and bool(os.getenv("GEMINI_API_KEY"))
     model = os.getenv("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
     return {"provider": provider, "ready": ready, "model": model}
+
+
+def _build_client():
+    """IMAGE_PROVIDER에 맞는 google-genai 클라이언트 생성."""
+    provider = (os.getenv("IMAGE_PROVIDER") or "none").strip().lower()
+    try:
+        from google import genai  # lazy import
+    except ImportError as e:
+        raise ImageError("google-genai 미설치: pip install google-genai") from e
+    if provider == "vertex":
+        project = os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GEMINI_VERTEX_PROJECT")
+        location = os.getenv("GOOGLE_CLOUD_LOCATION") or os.getenv("GEMINI_VERTEX_LOCATION", "global")
+        if not project:
+            raise ImageError("GEMINI_VERTEX_PROJECT(프로젝트 ID) 없음")
+        return genai.Client(vertexai=True, project=project, location=location)
+    key = os.getenv("GEMINI_API_KEY")
+    if not key:
+        raise ImageError("GEMINI_API_KEY 없음")
+    return genai.Client(api_key=key)
 
 
 def _default_style() -> str:
@@ -75,17 +97,8 @@ def _extract_inline(resp) -> bytes | None:
 
 def _generate_one(prompt: str, aspect: str) -> bytes | None:
     """한 장 생성 → PNG/JPEG 바이트. 실패 시 ImageError."""
-    key = os.getenv("GEMINI_API_KEY")
-    if not key:
-        raise ImageError("GEMINI_API_KEY 없음")
     model = os.getenv("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
-
-    try:
-        from google import genai
-    except ImportError as e:
-        raise ImageError("google-genai 미설치: pip install google-genai") from e
-
-    client = genai.Client(api_key=key)
+    client = _build_client()
 
     # (1) Imagen 계열
     if model.startswith("imagen"):

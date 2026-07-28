@@ -1,6 +1,12 @@
 # 비밀 키 — 절대 커밋 금지
 .env
 
+# Vertex 서비스 계정 키 (절대 커밋 금지)
+gcloud-key.json
+service-account*.json
+*-sa.json
+*credentials*.json
+
 # 생성된 이미지 (런타임 산출물)
 static/generated/
 

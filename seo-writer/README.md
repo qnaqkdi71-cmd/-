@@ -57,6 +57,32 @@ IMAGE_COUNT=3          # 대표 1 + 본문 2
 
 > ⚠️ AI 생성 이미지는 **실제 특정 장소·제품을 정확히 재현하지 못할 수** 있습니다(여행 명소 등). 그런 글은 실사진(스톡)이 더 정확합니다.
 
+## ★ Vertex AI — 크레딧 계정에서 'AQ. 키'가 막힐 때
+
+AI Studio에서 만든 키가 **`AQ.`로 시작**해 `401 ACCESS_TOKEN_TYPE_UNSUPPORTED`로 막히면(구글 새 정책), **Vertex AI**를 쓰면 됩니다. 같은 Cloud 프로젝트·크레딧을 **서비스 계정**으로 인증해서 키 형식 문제가 아예 없습니다.
+
+**1) Google Cloud 준비 (한 번만)**
+- **Vertex AI API 사용 설정**: [aiplatform 사용 설정](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com) → **사용**
+- **서비스 계정 만들기**: IAM 및 관리자 → 서비스 계정 → **만들기** → 역할 **Vertex AI User** 부여 → 완료
+- 만든 서비스 계정 클릭 → **키** 탭 → **키 추가 → 새 키 → JSON** → 다운로드
+- 받은 JSON 파일을 **`seo-writer` 폴더**에 넣고 이름을 **`gcloud-key.json`** 으로 변경
+
+**2) `.env` 설정**
+```
+LLM_PROVIDER=vertex
+IMAGE_PROVIDER=vertex
+GEMINI_MODEL=gemini-2.5-pro
+GEMINI_IMAGE_MODEL=imagen-3.0-generate-002
+GEMINI_VERTEX_PROJECT=여기에_프로젝트_ID   # 예: gen-lang-client-0937284289
+GEMINI_VERTEX_LOCATION=global
+GOOGLE_APPLICATION_CREDENTIALS=gcloud-key.json
+```
+(`GEMINI_API_KEY`는 비워둬도 됩니다.)
+
+**3) 실행** → `run-windows.bat` 재시작 → 배지가 **"AI: Vertex (gemini-2.5-pro)"** 면 성공.
+
+> 🔒 `gcloud-key.json`은 비밀 파일이라 `.gitignore`로 깃에 안 올라갑니다. 절대 공유 금지.
+
 ## 나중에 투자 (Claude로 전환)
 
 품질·물량·프라이버시가 필요해지면 `.env`만 바꾸면 됩니다 (코드 수정 불필요):

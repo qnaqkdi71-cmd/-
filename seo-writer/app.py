@@ -9,6 +9,7 @@
 
 from __future__ import annotations
 
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -20,6 +21,11 @@ from fastapi.templating import Jinja2Templates
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
+
+# Vertex 서비스 계정 파일: 상대경로면 seo-writer 폴더 기준 절대경로로
+_cred = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+if _cred and not os.path.isabs(_cred):
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(BASE_DIR / _cred)
 
 from seo.keywords import generate_keywords          # noqa: E402
 from seo.llm import LLM                              # noqa: E402
