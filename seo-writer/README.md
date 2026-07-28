@@ -18,6 +18,11 @@ uvicorn app:app --reload
 # → http://localhost:8000
 ```
 
+### 윈도우는 더 쉽게 — 원클릭
+윈도우 사용자는 명령어 없이, `seo-writer` 폴더의 **`run-windows.bat` 더블클릭** 한 번이면 됩니다.
+(최초 실행 시 가상환경 생성 → 메모장으로 `.env`에 키 입력 → 패키지 설치 → 서버 실행 → 브라우저 자동 열림)
+전제: [python.org](https://www.python.org/downloads/)에서 Python 설치 시 **"Add python.exe to PATH" 체크**.
+
 **키가 하나도 없어도** 경쟁분석 링크·글 구조(골격)·온페이지 세팅·SEO 점수·배포 플랜까지 다 보여줍니다.
 
 ## 무료 AI 연결 (실제 글 자동작성)
