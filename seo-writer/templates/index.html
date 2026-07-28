@@ -33,6 +33,10 @@
       <input type="checkbox" name="write_article" checked />
       <span>AI로 글까지 작성</span>
     </label>
+    <label class="check">
+      <input type="checkbox" name="make_images" {{ 'checked' if status.img_ready else '' }} />
+      <span>🖼 이미지도 생성 (Gemini)</span>
+    </label>
   </div>
 
   <button class="btn" type="submit">분석하고 글 작성하기 →</button>
@@ -41,7 +45,7 @@
       지금은 <b>AI 미연결</b> 상태라 <b>골격(구조·온페이지·점수·플랜)</b>까지 보여드립니다.
       <code>.env</code>에 무료 Gemini 키를 넣으면 실제 글이 자동 작성됩니다.
     {% else %}
-      AI 연결됨 · 실제 글이 작성됩니다.
+      AI 연결됨 · 실제 글이 작성됩니다{{ ' + Gemini 이미지까지 생성' if status.img_ready else '' }}.
     {% endif %}
   </p>
 </form>

@@ -83,6 +83,24 @@
 <section class="card">
   <h2>3 · 작성된 글 {% if article.is_skeleton %}<span class="mini warn">골격(AI 미연결)</span>{% endif %}</h2>
 
+  {% if image_error %}
+  <p class="img-err">🖼 이미지 생성 실패: {{ image_error }}<br />
+    <small>.env의 <code>GEMINI_IMAGE_MODEL</code> 을 상세페이지에서 쓰던 모델로 바꿔보세요
+    (예: <code>imagen-4.0-generate-001</code> 또는 <code>gemini-2.5-flash-image</code>). 결제(Paid tier) 필요.</small>
+  </p>
+  {% endif %}
+
+  {% if images %}
+  <div class="gallery">
+    {% for im in images %}
+    <figure class="gcard">
+      <img src="{{ im.url }}" alt="{{ im.alt }}" loading="lazy" />
+      <figcaption>{{ im.alt }} · <a href="{{ im.url }}" download>다운로드</a></figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <div class="meta-grid">
     <div><span class="k">타이틀 태그</span><span class="v">{{ article.title_tag }}</span></div>
     <div><span class="k">메타 설명</span><span class="v">{{ article.meta_description }}</span></div>

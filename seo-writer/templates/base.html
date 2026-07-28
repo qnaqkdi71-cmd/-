@@ -15,6 +15,9 @@
         <span class="pill {{ 'on' if status.serp_ready else 'off' }}">
           경쟁분석: {{ 'Serper 연결' if status.serp_ready else '수동 모드' }}
         </span>
+        <span class="pill {{ 'on' if status.img_ready else 'off' }}">
+          이미지: {{ '생성 ON' if status.img_ready else 'OFF' }}
+        </span>
       </div>
     </div>
   </header>

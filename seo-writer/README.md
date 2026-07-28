@@ -37,6 +37,21 @@ uvicorn app:app --reload
 없으면 `allintitle` 링크를 눌러 직접 확인하는 **수동 모드**(영구 무료)로 동작합니다.
 → [serper.dev](https://serper.dev) 가입 시 무료 크레딧 제공.
 
+## 이미지 자동 생성 (Gemini)
+
+글에 어울리는 **이미지를 Gemini로 자동 생성**해 본문에 붙입니다. **글쓰기와 같은 `GEMINI_API_KEY`·크레딧**을 재사용하므로 추가 발급이 없습니다. (결제/Paid tier 필요 — 이미지 생성은 유료·크레딧)
+
+`.env`에서:
+```
+IMAGE_PROVIDER=gemini
+GEMINI_IMAGE_MODEL=gemini-2.5-flash-image   # 상세페이지에서 쓰던 모델로 맞추면 됨(예: imagen-4.0-generate-001)
+IMAGE_ASPECT=16:9
+IMAGE_COUNT=3          # 대표 1 + 본문 2
+```
+동작 원리: 글이 만들어낸 **이미지 alt(설명)** → 이미지 프롬프트로 변환 → 생성 → 결과 화면에 **갤러리 + 다운로드**로 표시. 끄려면 `IMAGE_PROVIDER=none` 또는 생성 화면의 체크박스 해제.
+
+> ⚠️ AI 생성 이미지는 **실제 특정 장소·제품을 정확히 재현하지 못할 수** 있습니다(여행 명소 등). 그런 글은 실사진(스톡)이 더 정확합니다.
+
 ## 나중에 투자 (Claude로 전환)
 
 품질·물량·프라이버시가 필요해지면 `.env`만 바꾸면 됩니다 (코드 수정 불필요):
@@ -51,7 +66,7 @@ ANTHROPIC_MODEL=claude-sonnet-5
 
 1. **경쟁 판별** — 롱테일 후보 생성 + `allintitle` 실경쟁자 확인 (블로소득)
 2. **상위글 해부** — 현재 1페이지 글 분석 → 채울 틈 파악 (노아)
-3. **글 작성** — 검색의도·E-E-A-T·실물(템플릿/사례) 반영 (오석종·전문가)
+3. **글 작성 + 이미지** — 검색의도·E-E-A-T·실물(템플릿/사례) 반영 (오석종·전문가) + 어울리는 **이미지 자동 생성**(Gemini)
 4. **온페이지 조립** — 타이틀·메타·헤딩·slug·alt·앵커 + JSON-LD (전문가)
 5. **점수 + 배포 플랜** — SEO 자동 채점 + 소셜 SEO 유입 플랜 (오석종)
 
@@ -65,6 +80,7 @@ seo-writer/
     keywords.py          # 롱테일 생성 + allintitle URL + 경쟁도
     serp.py              # Serper 조회(+수동 폴백)
     llm.py               # gemini / claude / none 제공자 추상화
+    images.py            # Gemini 이미지 생성(imagen / gemini-*-image)
     pipeline.py          # 글 생성·온페이지·점수·플랜·마크다운 렌더
   templates/  static/    # 화면(HTML/CSS)
   .env.example           # 키 설정 예시

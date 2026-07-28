@@ -24,6 +24,7 @@ load_dotenv(BASE_DIR / ".env")
 from seo.keywords import generate_keywords          # noqa: E402
 from seo.llm import LLM                              # noqa: E402
 from seo.serp import SerpClient                      # noqa: E402
+from seo.images import generate_article_images, image_status  # noqa: E402
 from seo.strategy import ALGO_WEIGHTS, classify_competition  # noqa: E402
 from seo.pipeline import (                           # noqa: E402
     build_onpage,
@@ -33,6 +34,9 @@ from seo.pipeline import (                           # noqa: E402
     md_to_html,
     score_article,
 )
+
+GENERATED_DIR = BASE_DIR / "static" / "generated"
+GENERATED_DIR.mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(title="구글 상위노출 글 자동작성기")
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
@@ -44,10 +48,13 @@ INTENTS = ["자동 감지", "정보형", "거래형", "탐색형"]
 def _status():
     llm = LLM()
     serp = SerpClient()
+    img = image_status()
     return {
         "llm_label": llm.label,
         "llm_ready": llm.available,
         "serp_ready": serp.enabled,
+        "img_ready": img["ready"],
+        "img_model": img["model"],
     }
 
 
@@ -76,6 +83,7 @@ def generate(
     draft: str = Form(""),
     intent_choice: str = Form("자동 감지"),
     write_article: str = Form(""),  # 체크박스: 있으면 "on"
+    make_images: str = Form(""),    # 체크박스: 있으면 "on"
 ):
     keyword = (keyword or "").strip()
     draft = (draft or "").strip()
@@ -118,7 +126,15 @@ def generate(
         from seo.pipeline import _skeleton_article
         article, gen_status = _skeleton_article(keyword, intent), "글 생성 건너뜀(분석만)."
 
-    # 4) 온페이지 · 점수 · 배포 플랜
+    # 4) 이미지 생성 (Gemini) — 켜져 있고 키가 있을 때만
+    images, image_error = [], None
+    if make_images == "on":
+        gimgs, image_error = generate_article_images(
+            keyword, article, str(GENERATED_DIR), "/static/generated/"
+        )
+        images = [{"url": g.url, "alt": g.alt} for g in gimgs]
+
+    # 5) 온페이지 · 점수 · 배포 플랜
     onpage = build_onpage(keyword, article)
     score = score_article(keyword, article)
     plan = distribution_plan(keyword, intent)
@@ -140,5 +156,7 @@ def generate(
             "onpage": onpage,
             "score": score,
             "plan": plan,
+            "images": images,
+            "image_error": image_error,
         },
     )

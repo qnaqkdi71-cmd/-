@@ -1,6 +1,9 @@
 # 비밀 키 — 절대 커밋 금지
 .env
 
+# 생성된 이미지 (런타임 산출물)
+static/generated/
+
 # python
 __pycache__/
 *.py[cod]
