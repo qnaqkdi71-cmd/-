@@ -8,6 +8,9 @@
   <div class="tags">
     <span class="tag">의도: {{ intent }}</span>
     <span class="tag">{{ gen_status }}</span>
+    {% if article.is_skeleton %}
+      <a class="tag diag-tag" href="/diag">🩺 왜 골격만? 자가 진단 →</a>
+    {% endif %}
   </div>
 </div>
 

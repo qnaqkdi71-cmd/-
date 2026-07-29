@@ -42,6 +42,52 @@ class LLM:
             return f"Claude ({os.getenv('ANTHROPIC_MODEL', 'claude-sonnet-5')})"
         return "없음 (골격만)"
 
+    def diagnose(self) -> dict:
+        """실제로 짧은 호출을 한 번 시도해 성공/실패와 정확한 원인을 돌려준다.
+
+        결과 화면(/diag)에서 '왜 골격만 나오는지'를 사용자 화면에 그대로 보여주기 위함.
+        """
+        import traceback
+
+        info: dict = {
+            "provider": self.provider,
+            "label": self.label,
+            "available": self.available,
+            "env": {
+                "GEMINI_MODEL": os.getenv("GEMINI_MODEL"),
+                "GEMINI_VERTEX_PROJECT": os.getenv("GEMINI_VERTEX_PROJECT")
+                or os.getenv("GOOGLE_CLOUD_PROJECT"),
+                "GEMINI_VERTEX_LOCATION": os.getenv("GEMINI_VERTEX_LOCATION")
+                or os.getenv("GOOGLE_CLOUD_LOCATION"),
+                "GOOGLE_APPLICATION_CREDENTIALS": os.getenv("GOOGLE_APPLICATION_CREDENTIALS"),
+                "GEMINI_API_KEY_set": bool(os.getenv("GEMINI_API_KEY")),
+            },
+        }
+
+        # 서비스 계정 파일 존재 여부(Vertex)
+        cred = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        if cred:
+            info["cred_exists"] = os.path.isfile(cred)
+            info["cred_path"] = cred
+
+        if not self.available:
+            info["ok"] = False
+            info["error"] = (
+                f"제공자 '{self.provider}' 준비 안 됨 — 필수 값이 비어 있습니다. "
+                "(vertex면 GEMINI_VERTEX_PROJECT, gemini면 GEMINI_API_KEY 확인)"
+            )
+            return info
+
+        try:
+            out = self.complete("한국어로 딱 한 단어만 답해: 준비완료")
+            info["ok"] = True
+            info["sample"] = (out or "")[:200]
+        except Exception as e:  # noqa: BLE001 — 진단은 모든 오류를 표면화
+            info["ok"] = False
+            info["error"] = str(e)
+            info["traceback"] = traceback.format_exc()[-2000:]
+        return info
+
     def complete(self, prompt: str) -> str:
         """프롬프트 → 텍스트. 제공자별 분기. 실패 시 LLMError."""
         if self.provider == "gemini":
@@ -80,12 +126,42 @@ class LLM:
             from google import genai  # lazy import
         except ImportError as e:
             raise LLMError("google-genai 미설치: pip install google-genai") from e
-        try:
-            client = genai.Client(vertexai=True, project=project, location=location)
-            resp = client.models.generate_content(model=model, contents=prompt)
-            return (resp.text or "").strip()
-        except Exception as e:
-            raise LLMError(f"Vertex 호출 실패: {e}") from e
+
+        # 한 모델/리전 조합이 막혀도 골격으로 조용히 떨어지지 않도록 후보를 순서대로 시도.
+        # (설정값을 1순위로, 흔히 되는 조합을 폴백으로.)
+        model_candidates = [model]
+        for m in ("gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.0-flash"):
+            if m not in model_candidates:
+                model_candidates.append(m)
+        loc_candidates = [location]
+        for loc in ("global", "us-central1"):
+            if loc not in loc_candidates:
+                loc_candidates.append(loc)
+
+        errors: list[str] = []
+        for loc in loc_candidates:
+            try:
+                client = genai.Client(vertexai=True, project=project, location=loc)
+            except Exception as e:  # noqa: BLE001
+                errors.append(f"[{loc}] 클라이언트 생성 실패: {e}")
+                continue
+            for mdl in model_candidates:
+                try:
+                    resp = client.models.generate_content(model=mdl, contents=prompt)
+                    text = (resp.text or "").strip()
+                    if text:
+                        return text
+                    errors.append(f"[{loc}/{mdl}] 빈 응답")
+                except Exception as e:  # noqa: BLE001
+                    msg = str(e)
+                    errors.append(f"[{loc}/{mdl}] {msg}")
+                    # 인증/권한/사용설정 문제면 다른 조합도 동일하므로 즉시 중단.
+                    low = msg.lower()
+                    if any(k in low for k in ("permission", "denied", "credential",
+                                              "unauthenticated", "not enabled", "disabled",
+                                              "403", "401")):
+                        raise LLMError("Vertex 호출 실패: " + " | ".join(errors))
+        raise LLMError("Vertex 호출 실패: " + " | ".join(errors))
 
     # ── Claude (나중에) ──
     def _claude(self, prompt: str) -> str:

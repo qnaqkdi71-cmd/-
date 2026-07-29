@@ -37,6 +37,40 @@ def image_status() -> dict:
     return {"provider": provider, "ready": ready, "model": model}
 
 
+def image_diagnose() -> dict:
+    """이미지 생성을 실제로 한 장 시도해 성공/실패 원인을 돌려준다 (/diag 화면용)."""
+    import traceback
+
+    st = image_status()
+    info: dict = {
+        "provider": st["provider"],
+        "model": st["model"],
+        "ready": st["ready"],
+        "aspect": os.getenv("IMAGE_ASPECT", "16:9"),
+    }
+    if not st["ready"]:
+        info["ok"] = False
+        info["error"] = (
+            f"이미지 제공자 '{st['provider']}' 준비 안 됨 — "
+            "vertex면 GEMINI_VERTEX_PROJECT, gemini면 GEMINI_API_KEY 확인."
+        )
+        return info
+    try:
+        data = _generate_one(
+            _build_prompt("맑은 하늘 아래 초록 언덕", "테스트"),
+            os.getenv("IMAGE_ASPECT", "16:9"),
+        )
+        info["ok"] = bool(data)
+        info["bytes"] = len(data) if data else 0
+        if not data:
+            info["error"] = "응답에 이미지 데이터가 없습니다(모델이 이미지 미지원일 수 있음)."
+    except Exception as e:  # noqa: BLE001
+        info["ok"] = False
+        info["error"] = str(e)
+        info["traceback"] = traceback.format_exc()[-2000:]
+    return info
+
+
 def _build_client():
     """IMAGE_PROVIDER에 맞는 google-genai 클라이언트 생성."""
     provider = (os.getenv("IMAGE_PROVIDER") or "none").strip().lower()

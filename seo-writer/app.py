@@ -30,7 +30,7 @@ if _cred and not os.path.isabs(_cred):
 from seo.keywords import generate_keywords          # noqa: E402
 from seo.llm import LLM                              # noqa: E402
 from seo.serp import SerpClient                      # noqa: E402
-from seo.images import generate_article_images, image_status  # noqa: E402
+from seo.images import generate_article_images, image_status, image_diagnose  # noqa: E402
 from seo.strategy import ALGO_WEIGHTS, classify_competition  # noqa: E402
 from seo.pipeline import (                           # noqa: E402
     build_onpage,
@@ -80,6 +80,26 @@ def index(request: Request):
 @app.get("/health")
 def health():
     return {"ok": True, **_status()}
+
+
+@app.get("/diag", response_class=HTMLResponse)
+def diag(request: Request):
+    """실제 AI/이미지 호출을 한 번 시도해 성공/실패 원인을 화면에 그대로 보여준다.
+
+    '왜 실제 원고가 안 나오고 골격만 나오는지'를 사용자 컴퓨터에서 바로 진단.
+    """
+    llm_diag = LLM().diagnose()
+    img_diag = image_diagnose()
+    return templates.TemplateResponse(
+        request,
+        "diag.html",
+        {
+            "status": _status(),
+            "llm_diag": llm_diag,
+            "img_diag": img_diag,
+            "cred_resolved": os.getenv("GOOGLE_APPLICATION_CREDENTIALS"),
+        },
+    )
 
 
 @app.post("/generate", response_class=HTMLResponse)

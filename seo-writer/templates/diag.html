@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}자가 진단 — AI 연결 상태{% endblock %}
+{% block content %}
+
+<div class="result-head">
+  <a href="/" class="back">← 새로 시작</a>
+  <h1>🩺 자가 진단</h1>
+  <p class="vhint">
+    실제로 AI에 한 번 호출해서 <b>왜 골격만 나오는지</b>를 확인합니다.
+    아래 <b>글쓰기(LLM)</b>가 <span class="ok-txt">성공</span>이면 이제 실제 원고가 작성됩니다.
+    빨간 오류가 보이면 그 문장이 원인입니다.
+  </p>
+</div>
+
+<!-- 글쓰기(LLM) 진단 -->
+<section class="card">
+  <h2>1 · 글쓰기(AI) 연결 테스트
+    {% if llm_diag.ok %}<span class="mini ok-badge">성공</span>
+    {% else %}<span class="mini warn">실패</span>{% endif %}
+  </h2>
+
+  <div class="meta-grid">
+    <div><span class="k">제공자</span><span class="v">{{ llm_diag.provider }}</span></div>
+    <div><span class="k">모델/라벨</span><span class="v">{{ llm_diag.label }}</span></div>
+    <div><span class="k">프로젝트</span><span class="v code">{{ llm_diag.env.GEMINI_VERTEX_PROJECT or '—' }}</span></div>
+    <div><span class="k">리전</span><span class="v code">{{ llm_diag.env.GEMINI_VERTEX_LOCATION or '—' }}</span></div>
+    <div><span class="k">서비스계정 파일</span>
+      <span class="v code">{{ llm_diag.cred_path or cred_resolved or '—' }}
+        {% if llm_diag.cred_exists is defined %}
+          {{ '✅ 있음' if llm_diag.cred_exists else '❌ 파일 없음' }}
+        {% endif %}
+      </span></div>
+  </div>
+
+  {% if llm_diag.ok %}
+    <p class="ok-box">✅ AI 응답 성공! 샘플: <b>{{ llm_diag.sample }}</b><br />
+      이제 <a href="/">첫 화면</a>에서 키워드를 넣고 <b>“상위노출 글 작성”</b>을 누르면 실제 원고가 나옵니다.</p>
+  {% else %}
+    <p class="img-err">❌ 원인: {{ llm_diag.error }}</p>
+    {% if llm_diag.traceback %}
+    <details class="copybox">
+      <summary>기술 로그(펼치기) — 캡처해서 물어보면 정확히 해결돼요</summary>
+      <textarea readonly rows="10">{{ llm_diag.traceback }}</textarea>
+    </details>
+    {% endif %}
+    <ul class="checks">
+      <li class="no"><span class="mk">›</span> <b>PERMISSION_DENIED / 403 / SERVICE_DISABLED</b> — Vertex AI API 미사용 설정. <a class="ext" href="https://console.cloud.google.com/apis/library/aiplatform.googleapis.com" target="_blank" rel="noopener">여기서 “사용” ↗</a> 후 2~3분 뒤 재시작.</li>
+      <li class="no"><span class="mk">›</span> <b>UNAUTHENTICATED / credential / 401</b> — <code>gcloud-key.json</code> 문제. seo-writer 폴더 안에 있고 이름이 정확한지 확인(위 ‘파일 없음’이면 이것).</li>
+      <li class="no"><span class="mk">›</span> <b>404 / NOT_FOUND (model)</b> — 모델명을 <code>gemini-2.5-flash</code>로 바꿔 시도(자동 폴백도 시도합니다).</li>
+      <li class="no"><span class="mk">›</span> <b>google-genai 미설치</b> — 검은 창 닫고 <code>run-windows.bat</code> 다시 실행(패키지 설치).</li>
+    </ul>
+  {% endif %}
+</section>
+
+<!-- 이미지 진단 -->
+<section class="card">
+  <h2>2 · 이미지 생성 테스트
+    {% if img_diag.ok %}<span class="mini ok-badge">성공</span>
+    {% else %}<span class="mini warn">실패</span>{% endif %}
+  </h2>
+  <div class="meta-grid">
+    <div><span class="k">제공자</span><span class="v">{{ img_diag.provider }}</span></div>
+    <div><span class="k">이미지 모델</span><span class="v code">{{ img_diag.model }}</span></div>
+    <div><span class="k">비율</span><span class="v">{{ img_diag.aspect }}</span></div>
+  </div>
+  {% if img_diag.ok %}
+    <p class="ok-box">✅ 이미지 생성 성공 ({{ img_diag.bytes }} bytes). 결과 화면에서 자동으로 붙습니다.</p>
+  {% else %}
+    <p class="img-err">❌ 원인: {{ img_diag.error }}</p>
+    <p class="vhint"><small>이미지가 실패해도 <b>글은 나옵니다</b>. 모델명을
+      <code>imagen-3.0-generate-002</code> 또는 <code>gemini-2.5-flash-image</code>로 바꿔보세요.
+      이미지가 필요 없으면 <code>.env</code>에서 <code>IMAGE_PROVIDER=none</code>.</small></p>
+    {% if img_diag.traceback %}
+    <details class="copybox">
+      <summary>기술 로그(펼치기)</summary>
+      <textarea readonly rows="8">{{ img_diag.traceback }}</textarea>
+    </details>
+    {% endif %}
+  {% endif %}
+</section>
+
+<div class="center"><a href="/" class="btn ghost">← 첫 화면으로</a></div>
+{% endblock %}
