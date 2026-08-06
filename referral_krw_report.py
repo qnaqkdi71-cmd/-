@@ -143,11 +143,20 @@ OKX_AFFILIATE_USDT = """
 """
 
 # 본인 거래 수수료 환급 — 본 합계 제외, 별도 섹션
+#
+# [채택값 주의] 지시 문서 §12 는 이 값을 0.0972540000 으로 적었으나, OKX 원본 export 의
+# 2026-07-06 두 행(0.04827443 + 0.0489801)을 합하면 0.09725453 이다. 차이 5.3e-7 은
+# 허용 오차 1e-8 을 넘는다. 거래소 원본 export 가 증빙의 근거이므로 **원본값을 채택**한다.
+# (사용자 확인 완료. 이 항목은 본 합계에서 제외되는 참고 항목이라 총 레퍼럴 수익액에는
+#  영향이 없다.) 문서값과의 차이는 경고 섹션과 검증 부록에 그대로 남긴다.
 OKX_FEE_REBATE_USDT = """
-2026-07-06|0.0972540000
+2026-07-06|0.0972545300
 """
 
-# 13-1 수량 검증 기대값
+# 지시 문서 §12/§13-1 에 적혀 있던 값 — 원본과 불일치하여 채택하지 않았음을 기록해 둔다.
+DOC_SPEC_OKX_FEE_REBATE = Decimal("0.0972540000")
+
+# 13-1 수량 검증 기대값 (OKX Fee rebate 는 위 사유로 원본 기준값 사용)
 EXPECTED_TOTALS = {
     "비트겟 Rebate rewards USDT 합계": Decimal("33.6714040311"),
     "비트겟 Rebate USDT 합계": Decimal("0.0756270000"),
@@ -156,7 +165,7 @@ EXPECTED_TOTALS = {
     "비트겟 AB": Decimal("0.4988895750"),
     "비트겟 U": Decimal("0.0009804960"),
     "OKX Affiliate commission USDT 합계": Decimal("42.2223661000"),
-    "OKX Fee rebate USDT 합계": Decimal("0.0972540000"),
+    "OKX Fee rebate USDT 합계": Decimal("0.0972545300"),
 }
 
 EXPECTED_ROWCOUNTS = {"bitget": 47, "okx": 470}
@@ -260,6 +269,9 @@ class Checks:
 
 
 CHECKS = Checks()
+
+# 보고서 상단 경고 섹션에 실릴 문구들
+WARNINGS: List[str] = []
 
 
 # ---------------------------------------------------------------------------
@@ -475,7 +487,7 @@ def _compare_raw(exch: str, agg: Dict[tuple, Decimal], spec: dict):
 # ---------------------------------------------------------------------------
 
 def validate_closes(closes: Dict[date, Decimal], source: str, raw_excerpt: str) -> List[str]:
-    warnings: List[str] = []
+    warnings = WARNINGS
 
     LOG.rule("4. 종가 타당성 검증")
     LOG(f"  소스: {source}")
@@ -610,6 +622,24 @@ def validate_quantities(spec: dict):
         got = actual[name]
         CHECKS.add(f"수량 {name}", abs(got - exp) <= QTY_TOL,
                    f"기대 {exp} / 실제 {got} / 차이 {got - exp}")
+
+    # 지시 문서 §12 기대값과 원본값이 어긋난 항목을 명시적으로 남긴다 (조용히 넘기지 않음).
+    fee = actual["OKX Fee rebate USDT 합계"]
+    gap = fee - DOC_SPEC_OKX_FEE_REBATE
+    if gap != 0:
+        CHECKS.add(
+            "OKX Fee rebate: 문서 기대값 대신 원본 export 값 채택 (사유 명시)",
+            True,
+            f"문서 §12 {DOC_SPEC_OKX_FEE_REBATE} / 원본 {fee} / 차이 {gap} — "
+            f"원본 2026-07-06 두 행(0.04827443 + 0.0489801)이 근거. "
+            f"참고 항목이므로 총 레퍼럴 수익액에는 영향 없음",
+        )
+        WARNINGS.append(
+            f"OKX <b>Fee rebate</b> 수량은 지시 문서에 적힌 {DOC_SPEC_OKX_FEE_REBATE} 가 아니라 "
+            f"거래소 원본 export 기준 <b>{fee}</b> 를 채택했습니다 "
+            f"(원본 2026-07-06 두 행 0.04827443 + 0.0489801, 차이 {gap}). "
+            f"본 항목은 참고 섹션 전용이므로 <b>총 레퍼럴 수익액에는 영향이 없습니다.</b>"
+        )
     return actual
 
 
@@ -682,13 +712,25 @@ def register_korean_font() -> Tuple[str, str]:
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
 
+    home = os.path.expanduser("~")
     candidates = [
+        # Linux (Debian/Ubuntu: apt-get install -y fonts-nanum)
         ("NanumGothic", "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
          "/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf"),
         ("NanumBarunGothic", "/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf",
          "/usr/share/fonts/truetype/nanum/NanumBarunGothicBold.ttf"),
+        # Windows
         ("MalgunGothic", "C:/Windows/Fonts/malgun.ttf", "C:/Windows/Fonts/malgunbd.ttf"),
+        ("NanumGothic", "C:/Windows/Fonts/NanumGothic.ttf",
+         "C:/Windows/Fonts/NanumGothicBold.ttf"),
+        # macOS
+        ("AppleSDGothicNeo", "/System/Library/Fonts/AppleSDGothicNeo.ttc", None),
         ("AppleGothic", "/System/Library/Fonts/Supplemental/AppleGothic.ttf", None),
+        ("NanumGothic", f"{home}/Library/Fonts/NanumGothic.ttf",
+         f"{home}/Library/Fonts/NanumGothicBold.ttf"),
+        # 스크립트와 같은 디렉터리에 폰트를 직접 놓은 경우
+        ("NanumGothic", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                     "NanumGothic.ttf"), None),
     ]
     for name, reg, bold in candidates:
         if os.path.exists(reg):
@@ -703,8 +745,11 @@ def register_korean_font() -> Tuple[str, str]:
             LOG(f"  한글 폰트 등록: {name} ({reg})")
             return name, bold_name
     raise SystemExit(
-        "[치명] 한글 폰트를 찾지 못했습니다. NanumGothic 설치 후 다시 실행하십시오.\n"
-        "  Debian/Ubuntu: apt-get install -y fonts-nanum")
+        "[치명] 한글 폰트를 찾지 못했습니다. 한글이 깨진 PDF 를 만들지 않기 위해 중단합니다.\n"
+        "  Debian/Ubuntu : sudo apt-get install -y fonts-nanum\n"
+        "  macOS         : brew install --cask font-nanum-gothic\n"
+        "  Windows       : 맑은 고딕이 기본 설치되어 있습니다 (C:/Windows/Fonts/malgun.ttf)\n"
+        "  또는 NanumGothic.ttf 를 이 스크립트와 같은 디렉터리에 두고 다시 실행하십시오.")
 
 
 def build_pdf(path, all_rows, spec, closes, source, fetched_at, totals, avg, warnings):
@@ -813,7 +858,7 @@ def build_pdf(path, all_rows, spec, closes, source, fetched_at, totals, avg, war
           Paragraph(f"※ 미상장 코인(LUNC·LUNA·AB·U)은 KRW 마켓 미상장으로 환산에서 제외되어 "
                     f"위 합계에 0원으로 반영됩니다.", st_small)]
 
-    # 정밀도 각주
+    # 정밀도 각주 (§5-3)
     diff = q_krw(totals["referral_raw"]) - totals["referral_rounded_sum"]
     if diff != 0:
         E.append(Paragraph(
@@ -824,6 +869,17 @@ def build_pdf(path, all_rows, spec, closes, source, fetched_at, totals, avg, war
         E.append(Paragraph(
             "※ 총합은 반올림 전 값의 총합을 마지막에 한 번 반올림한 값이며, "
             "반올림된 일별 금액의 단순 합산 결과와 일치합니다.", st_small))
+
+    # 소계를 눈으로 더했을 때 합계와 1원 어긋나 보이는 경우를 미리 설명한다.
+    sub_diff = (q_krw(totals["bitget_raw"]) + q_krw(totals["okx_raw"])
+                - q_krw(totals["referral_raw"]))
+    if sub_diff != 0:
+        E.append(Paragraph(
+            f"※ 표의 거래소별 소계를 그대로 더하면 "
+            f"{q_krw(totals['bitget_raw']) + q_krw(totals['okx_raw']):,}원이 되어 "
+            f"합계와 {abs(sub_diff):,}원 어긋나 보입니다. 이는 오류가 아니라 각 소계를 "
+            f"원 단위로 표시하면서 생긴 반올림 차이이며, 합계는 반올림 전 원본 값을 모두 "
+            f"더한 뒤 한 번만 반올림한 값입니다.", st_small))
     E.append(PageBreak())
 
     # ---- 3. 거래소별 일별 명세 ----------------------------------------------
@@ -898,6 +954,10 @@ def build_pdf(path, all_rows, spec, closes, source, fetched_at, totals, avg, war
     E.append(Paragraph(
         f"본인 수수료 환급 합계: {fmt_qty(totals['rebate_qty'])} USDT / "
         f"{q_krw(totals['rebate_raw']):,} 원", st_h2))
+    E.append(Paragraph(
+        "※ OKX Fee rebate 수량은 거래소 원본 export 의 2026-07-06 두 행"
+        "(0.04827443 + 0.0489801 = 0.09725453)을 기준으로 산정했습니다. "
+        "본 항목은 총 레퍼럴 수익액에 포함되지 않습니다.", st_small))
     E.append(PageBreak())
 
     # ---- 6. 미상장 코인 -----------------------------------------------------
