@@ -1,0 +1,63 @@
+
+==============================================================================
+레퍼럴 수익 원화 환산 보고서
+==============================================================================
+  대상 기간 : 2026-07-05 ~ 2026-08-05 (KST)
+  실행 시각 : 2026-08-06 16:08:36 KST
+
+==============================================================================
+13-1. 수량 검증 (허용 오차 1e-8)
+==============================================================================
+  [PASS] 수량 비트겟 Rebate rewards USDT 합계 — 기대 33.6714040311 / 실제 33.6714040310 / 차이 -1E-10
+  [PASS] 수량 비트겟 Rebate USDT 합계 — 기대 0.0756270000 / 실제 0.0756270000 / 차이 0E-10
+  [PASS] 수량 비트겟 LUNC — 기대 60.6742920000 / 실제 60.6742920000 / 차이 0E-10
+  [PASS] 수량 비트겟 LUNA — 기대 0.0160108650 / 실제 0.0160108650 / 차이 0E-10
+  [PASS] 수량 비트겟 AB — 기대 0.4988895750 / 실제 0.4988895750 / 차이 0E-10
+  [PASS] 수량 비트겟 U — 기대 0.0009804960 / 실제 0.0009804960 / 차이 0E-10
+  [PASS] 수량 OKX Affiliate commission USDT 합계 — 기대 42.2223661000 / 실제 42.2223661000 / 차이 0E-10
+  [PASS] 수량 OKX Fee rebate USDT 합계 — 기대 0.0972540000 / 실제 0.0972540000 / 차이 0E-10
+
+==============================================================================
+원본 파일 교차 검증 (문서 표 ↔ 거래소 원본 export)
+==============================================================================
+  [PASS] 비트겟 원본 행 수 47행 — 실제 47행
+  [PASS] 비트겟 Rebate rewards/USDT 원본 합계 == 문서 표 합계 — 원본 33.671404031082 / 문서 33.6714040310 / 차이 8.2E-11
+  [PASS] 비트겟 Rebate rewards/USDT 일자별 수량 == 문서 표 — 전부 일치
+  [PASS] 비트겟 Rebate/USDT 원본 합계 == 문서 표 합계 — 원본 0.075627 / 문서 0.0756270000 / 차이 0E-10
+  [PASS] 비트겟 Rebate/USDT 일자별 수량 == 문서 표 — 전부 일치
+  [PASS] 비트겟 미상장 LUNC 원본 == 문서 표 — 원본 60.674292 / 문서 60.6742920000
+  [PASS] 비트겟 미상장 LUNA 원본 == 문서 표 — 원본 0.016010865 / 문서 0.0160108650
+  [PASS] 비트겟 미상장 AB 원본 == 문서 표 — 원본 0.498889575 / 문서 0.4988895750
+  [PASS] 비트겟 미상장 U 원본 == 문서 표 — 원본 0.000980496 / 문서 0.0009804960
+  [PASS] OKX 원본 행 수 470행 — 실제 470행
+  [PASS] OKX 유형별 행 수 (Affiliate 465 / Fee rebate 2 / 이체 2 / 출금 1) — Affiliate commission=465, Fee rebate=2, From unified trading account=2, Withdrawal=1
+  [PASS] OKX Affiliate commission/USDT 원본 합계 == 문서 표 합계 — 원본 42.22236610 / 문서 42.2223661000 / 차이 0E-10
+  [PASS] OKX Affiliate commission/USDT 일자별 수량 == 문서 표 — 전부 일치
+  [FAIL] OKX Fee rebate/USDT 원본 합계 == 문서 표 합계 — 원본 0.09725453 / 문서 0.0972540000 / 차이 5.300E-7
+  [FAIL] OKX Fee rebate/USDT 일자별 수량 == 문서 표 — 불일치 일자: 2026-07-06 (원본 0.09725453 / 문서 0.0972540000)
+
+==============================================================================
+3. 종가 조회 (업비트 1순위 → 빗썸 2순위)
+==============================================================================
+  종가 소스 시도: 업비트 Open API (api.upbit.com/v1/candles/days)
+  → 실패. ProxyError: HTTPSConnectionPool(host='api.upbit.com', port=443): Max retries exceeded with url: /v1/candles/days?market=KRW-USDT&count=60&to=2026-08-06T00:00:00Z (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+  종가 소스 시도: 빗썸 Public API v1 (api.bithumb.com/v1/candles/days)
+  → 실패. ProxyError: HTTPSConnectionPool(host='api.bithumb.com', port=443): Max retries exceeded with url: /v1/candles/days?market=KRW-USDT&count=60 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+  종가 소스 시도: 빗썸 Public API 구버전 (api.bithumb.com/public/candlestick)
+  → 실패. ProxyError: HTTPSConnectionPool(host='api.bithumb.com', port=443): Max retries exceeded with url: /public/candlestick/USDT_KRW/24h (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[중단] 종가 조회 실패 — 값을 추정하거나 보간하지 않고 여기서 멈춥니다.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+업비트·빗썸 어느 소스에서도 KRW-USDT 일봉 종가를 받지 못했습니다.
+    - 업비트 Open API (api.upbit.com/v1/candles/days)
+        ProxyError: HTTPSConnectionPool(host='api.upbit.com', port=443): Max retries exceeded with url: /v1/candles/days?market=KRW-USDT&count=60&to=2026-08-06T00:00:00Z (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+    - 빗썸 Public API v1 (api.bithumb.com/v1/candles/days)
+        ProxyError: HTTPSConnectionPool(host='api.bithumb.com', port=443): Max retries exceeded with url: /v1/candles/days?market=KRW-USDT&count=60 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+    - 빗썸 Public API 구버전 (api.bithumb.com/public/candlestick)
+        ProxyError: HTTPSConnectionPool(host='api.bithumb.com', port=443): Max retries exceeded with url: /public/candlestick/USDT_KRW/24h (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
+
+  종가를 추정하거나 보간하지 않고 여기서 중단합니다.
+
+  지금까지의 수량 검증 결과:
+    PASS 21 / FAIL 2
